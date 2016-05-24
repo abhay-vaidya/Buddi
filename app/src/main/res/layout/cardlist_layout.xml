@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardElevation="0dp"
+    card_view:cardBackgroundColor="@color/colorCard"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="10dp"
+>
+
+<RelativeLayout
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/imageView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="14dp"
+        android:src="@drawable/dog"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@color/white"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Jerry"
+        android:textStyle="bold"
+        android:textColor="#FFF"
+        android:id="@+id/petName"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/imageView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#FFF"
+        android:text="7 weeks old"
+        android:textSize="12sp"
+        android:id="@+id/petAge"
+        android:layout_below="@+id/petName"
+        android:layout_toEndOf="@+id/imageView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#FFF"
+        android:text="Golden Retriever"
+        android:textSize="12sp"
+        android:id="@+id/petBreed"
+        android:layout_below="@+id/petAge"
+        android:layout_toEndOf="@+id/imageView" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="96dp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/detailsButton" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/detailsButton"
+        android:paddingTop="41dp"
+        android:paddingBottom="41dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:tint="@color/colorPrimaryDark"
+
+        android:background="?android:selectableItemBackground"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:src="@drawable/ic_navigate_next_white_24dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>
+</android.support.v7.widget.CardView>
