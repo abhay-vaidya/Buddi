@@ -10,13 +10,8 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import vaidya.abhay.myapplication.Data;
-import vaidya.abhay.myapplication.R;
-import vaidya.abhay.myapplication.RecyclerAdapter;
 import vaidya.abhay.myapplication.helper.SwipeHelper;
 
 
