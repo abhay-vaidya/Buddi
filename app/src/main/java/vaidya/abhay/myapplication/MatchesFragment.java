@@ -10,15 +10,29 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.ArrayList;
 import java.util.List;
+
+
+import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import vaidya.abhay.myapplication.helper.SwipeHelper;
 
 
 public class MatchesFragment extends Fragment {
+
+    String mName;
+    final String BASE_URL = "http://animalservices.planet404.com/api/v1/dogs/1";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.fragment_matches, container, false);
 
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.petList);
@@ -33,12 +47,14 @@ public class MatchesFragment extends Fragment {
         return rootView;
     }
 
+
     private List<Data> createList(int size) {
+
 
         List<Data> result = new ArrayList<Data>();
         for (int i=1; i <= size; i++) {
             Data ci = new Data();
-            ci.name = "Jerry " + i;
+            ci.name = "Jerry";
             ci.age = (i+1) + " weeks old";
             ci.breed = "Golden Retriever";
             Resources res = getResources();
