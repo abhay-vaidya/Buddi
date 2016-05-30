@@ -1,11 +1,9 @@
-package vaidya.abhay.myapplication.helper;
+package group.project.buddi.helper;
 
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
-import vaidya.abhay.myapplication.HomeActivity;
-import vaidya.abhay.myapplication.RecyclerAdapter;
+import group.project.buddi.RecyclerAdapter;
 
 /**
  * Created by Abhay on 15/05/2016.

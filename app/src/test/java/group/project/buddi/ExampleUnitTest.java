@@ -1,4 +1,4 @@
-package vaidya.abhay.myapplication;
+package group.project.buddi;
 
 import org.junit.Test;
 

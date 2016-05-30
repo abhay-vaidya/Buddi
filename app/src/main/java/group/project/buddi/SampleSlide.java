@@ -1,4 +1,4 @@
-package vaidya.abhay.myapplication;
+package group.project.buddi;
 
 /**
  * Created by Abhay on 18/05/2016.

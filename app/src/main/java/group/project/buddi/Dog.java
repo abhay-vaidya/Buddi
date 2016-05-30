@@ -1,6 +1,4 @@
-package vaidya.abhay.myapplication;
-
-import com.google.gson.annotations.SerializedName;
+package group.project.buddi;
 
 
 /**

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="vaidya.abhay.myapplication">
+    package="group.project.buddi">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashActivity"
+            android:name="group.project.buddi.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,18 +24,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name="group.project.buddi.LoginActivity"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".SignupActivity"
+            android:name="group.project.buddi.SignupActivity"
             android:label="@string/title_activity_signup"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".MyIntro"
+            android:name="group.project.buddi.MyIntro"
             android:label="@string/app_intro" />
         <activity
-            android:name=".HomeActivity"
+            android:name="group.project.buddi.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

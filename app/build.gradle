@@ -6,7 +6,7 @@ android {
 
 
     defaultConfig {
-        applicationId "vaidya.abhay.myapplication"
+        applicationId "group.project.buddi"
         minSdkVersion 21
         targetSdkVersion 23
         versionCode 1

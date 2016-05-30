@@ -1,4 +1,4 @@
-package vaidya.abhay.myapplication;
+package group.project.buddi;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -11,17 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import java.util.ArrayList;
 import java.util.List;
 
 
-import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import vaidya.abhay.myapplication.helper.SwipeHelper;
+import group.project.buddi.helper.SwipeHelper;
 
 
 public class MatchesFragment extends Fragment {

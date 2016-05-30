@@ -1,7 +1,5 @@
-package vaidya.abhay.myapplication;
+package group.project.buddi;
 
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
