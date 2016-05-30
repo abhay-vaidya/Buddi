@@ -25,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
                 if (isFirstStart) {
 
                     //  Launch app intro
-                    Intent i = new Intent(getApplicationContext(), MyIntro.class);
+                    Intent i = new Intent(getApplicationContext(), IntroSlides.class);
                     startActivity(i);
 
                     //  Make a new preferences editor

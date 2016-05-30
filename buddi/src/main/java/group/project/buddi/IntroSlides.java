@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.github.paolorotolo.appintro.AppIntro;
 
-public class MyIntro extends AppIntro {
+public class IntroSlides extends AppIntro {
 
     // Please DO NOT override onCreate. Use init.
     @Override

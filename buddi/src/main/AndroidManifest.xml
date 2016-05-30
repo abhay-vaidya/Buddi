@@ -32,7 +32,7 @@
             android:label="@string/title_activity_signup"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="group.project.buddi.MyIntro"
+            android:name=".IntroSlides"
             android:label="@string/app_intro" />
         <activity
             android:name="group.project.buddi.HomeActivity"
