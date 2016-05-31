@@ -86,7 +86,7 @@
 
         android:background="?android:selectableItemBackground"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:src="@drawable/ic_navigate_next_white_24dp"
+        android:src="@mipmap/ic_keyboard_arrow_right_white_24dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />
 

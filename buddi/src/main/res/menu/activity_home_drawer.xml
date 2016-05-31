@@ -4,20 +4,20 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_matches"
-            android:icon="@drawable/ic_pets_black_24dp"
+            android:icon="@mipmap/ic_pets_black_24dp"
             android:checked="true"
             android:title="Your Matches" />
         <item
             android:id="@+id/nav_fav"
-            android:icon="@drawable/ic_favorite_black_24dp"
+            android:icon="@mipmap/ic_favorite_black_24dp"
             android:title="Favourites" />
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_face_black_24dp"
+            android:icon="@mipmap/ic_face_black_24dp"
             android:title="Profile" />
         <item
             android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_settings_black_24dp"
+            android:icon="@mipmap/ic_settings_black_24dp"
             android:title="Settings" />
 
     </group>
@@ -28,7 +28,7 @@
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_send"
-                    android:icon="@drawable/ic_menu_send"
+                    android:icon="@mipmap/ic_send_black_24dp"
                     android:title="Closest Shelter" />
 
             </group>
