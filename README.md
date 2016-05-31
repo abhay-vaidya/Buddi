@@ -6,6 +6,4 @@
 
 ###### Developed by Abhay Vaidya, Hamzah Randhawa, Sayon Kathirgamanathan, and Umar Ahmed.
 
----
-
 
