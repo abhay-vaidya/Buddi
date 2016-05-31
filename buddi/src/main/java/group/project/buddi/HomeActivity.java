@@ -102,14 +102,8 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.nav_matches:
                 fragmentClass = matchesFragment.getClass();
                 break;
-            case R.id.nav_fav:
-                fragmentClass = FavouritesFragment.class;
-                break;
             case R.id.nav_profile:
                 fragmentClass = ProfileFragment.class;
-                break;
-            case R.id.nav_settings:
-                fragmentClass = SettingsFragment.class;
                 break;
             case R.id.nav_send:
                 fragmentClass = ContactFragment.class;
