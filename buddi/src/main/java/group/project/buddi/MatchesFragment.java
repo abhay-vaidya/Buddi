@@ -17,15 +17,17 @@ import java.util.List;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+
 import group.project.buddi.helper.SwipeHelper;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class MatchesFragment extends Fragment {
+
+    List<Data> dogs = new ArrayList<Data>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,7 +39,7 @@ public class MatchesFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        RecyclerAdapter ra = new RecyclerAdapter(createList(10));
+        RecyclerAdapter ra = new RecyclerAdapter(createList());
         recyclerView.setAdapter(ra);
         ItemTouchHelper.Callback callback = new SwipeHelper(ra);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
@@ -47,21 +49,33 @@ public class MatchesFragment extends Fragment {
 
 
 
-    private List<Data> createList(int size) {
+    private List<Data> createList() {
 
-        List<Data> result = new ArrayList<Data>();
-        for (int i=1; i <= size; i++) {
-            Data ci = new Data();
-            ci.name = "Bob";
-            ci.age = (i+1) + " weeks old";
-            ci.breed = "Golden Retriever";
-            Resources res = getResources();
-            Drawable drawable = res.getDrawable(R.drawable.dog);
-            ci.image = drawable;
+        Ion.with(this)
+                .load("http://animalservices.planet404.com/api/v1/dogs")
+                .asJsonArray()
+                .setCallback(new FutureCallback<JsonArray>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonArray result) {
 
-            result.add(ci);
-        }
+                        for (int i=0; i<result.size(); i++) {
+                            JsonObject dog = result.get(i).getAsJsonObject();
+//                            textView.append(dog.get("name").getAsString() + '\n' + dog.get("reference_num").getAsString() + "\n\n");
 
-        return result;
+                            Data ci = new Data();
+                            ci.name = dog.get("name").getAsString();
+                            ci.age = "6 weeks old";
+                            ci.breed = "Golden Retriever";
+                            Resources res = getResources();
+                            Drawable drawable = res.getDrawable(R.drawable.dog);
+                            ci.image = drawable;
+
+                            dogs.add(ci);
+
+                        }
+                    }
+                });
+
+        return dogs;
     }
 }

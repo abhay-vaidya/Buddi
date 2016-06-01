@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="androidasync-2.1.7">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/buddi/build/intermediates/exploded-aar/com.koushikdutta.async/androidasync/2.1.7/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/buddi/build/intermediates/exploded-aar/com.koushikdutta.async/androidasync/2.1.7/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.koushikdutta.async/androidasync/2.1.7/6f36af80258a59e142c59b4799c8e31d1dc442b2/androidasync-2.1.7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

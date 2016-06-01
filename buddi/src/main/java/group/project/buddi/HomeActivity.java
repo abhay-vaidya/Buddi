@@ -19,9 +19,6 @@ import java.util.List;
 import group.project.buddi.network.Dog;
 import group.project.buddi.network.DogService;
 import group.project.buddi.network.ServiceGenerator;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -32,7 +29,6 @@ public class HomeActivity extends AppCompatActivity {
     private ActionBarDrawerToggle drawerToggle;
 
     private MatchesFragment matchesFragment = new MatchesFragment();
-    List<Dog> dogs = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,32 +49,6 @@ public class HomeActivity extends AppCompatActivity {
 
         // Find our navigation view
         nvDrawer = (NavigationView) findViewById(R.id.nav_view);
-
-
-
-
-        //  REST API
-        DogService client = ServiceGenerator.createService(DogService.class);
-
-        Call<List<Dog>> call = client.dogs("1");
-
-        call.enqueue(new Callback<List<Dog>>() {
-            @Override
-            public void onResponse(Call<List<Dog>> call, Response<List<Dog>> response) {
-                dogs = response.body();
-            }
-
-            @Override
-            public void onFailure(Call<List<Dog>> call, Throwable t) {
-
-            }
-        });
-
-        for (Dog dog : dogs) {
-            Toast.makeText(HomeActivity.this, dog.toString(), Toast.LENGTH_SHORT).show();
-        }
-
-
 
 
         // Setup drawer view
