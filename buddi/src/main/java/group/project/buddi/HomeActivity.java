@@ -20,6 +20,8 @@ import group.project.buddi.network.Dog;
 import group.project.buddi.network.DogService;
 import group.project.buddi.network.ServiceGenerator;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -30,6 +32,7 @@ public class HomeActivity extends AppCompatActivity {
     private ActionBarDrawerToggle drawerToggle;
 
     private MatchesFragment matchesFragment = new MatchesFragment();
+    List<Dog> dogs = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +62,17 @@ public class HomeActivity extends AppCompatActivity {
 
         Call<List<Dog>> call = client.dogs("1");
 
-        List<Dog> dogs = null;
-        try {
-            dogs = call.execute().body();
-        } catch (IOException e) {
-            // handle errors
-        }
+        call.enqueue(new Callback<List<Dog>>() {
+            @Override
+            public void onResponse(Call<List<Dog>> call, Response<List<Dog>> response) {
+                dogs = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<List<Dog>> call, Throwable t) {
+
+            }
+        });
 
         for (Dog dog : dogs) {
             Toast.makeText(HomeActivity.this, dog.toString(), Toast.LENGTH_SHORT).show();
