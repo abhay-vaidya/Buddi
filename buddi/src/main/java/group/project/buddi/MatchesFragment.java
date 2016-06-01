@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.google.gson.JsonArray;
@@ -27,32 +26,29 @@ import group.project.buddi.helper.SwipeHelper;
 
 public class MatchesFragment extends Fragment {
 
-    List<Data> dogs = new ArrayList<Data>();
-    RecyclerAdapter ra;
+    private List<Data> data = new ArrayList<Data>();
+    private DataAdapter adapter;
+    private RecyclerView recyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_matches, container, false);
-
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.petList);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.petList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        ra = new RecyclerAdapter(createList());
-        ra.swap(dogs);
 
-
-        recyclerView.setAdapter(ra);
-        ItemTouchHelper.Callback callback = new SwipeHelper(ra);
+        ItemTouchHelper.Callback callback = new SwipeHelper(adapter);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerView);
+
+        loadJSON();
 
         return rootView;
     }
 
-    private List<Data> createList() {
-
+    private void loadJSON() {
         Ion.with(getActivity())
                 .load("http://animalservices.planet404.com/api/v1/dogs")
                 .asJsonArray()
@@ -63,7 +59,7 @@ public class MatchesFragment extends Fragment {
                         for (int i=0; i<result.size(); i++) {
                             JsonObject dog = result.get(i).getAsJsonObject();
 //                            textView.append(dog.get("name").getAsString() + '\n' + dog.get("reference_num").getAsString() + "\n\n");
-                            Toast.makeText(getActivity(), dog.get("name").getAsString(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getActivity(), dog.get("name").getAsString(), Toast.LENGTH_SHORT).show();
 
                             Data ci = new Data();
                             ci.name = dog.get("name").getAsString();
@@ -73,11 +69,13 @@ public class MatchesFragment extends Fragment {
                             Drawable drawable = res.getDrawable(R.drawable.dog);
                             ci.image = drawable;
 
-                            dogs.add(ci);
+                            data.add(ci);
 
                         }
+
+                        adapter = new DataAdapter(data);
+                        recyclerView.setAdapter(adapter);
                     }
                 });
-        return dogs;
     }
 }

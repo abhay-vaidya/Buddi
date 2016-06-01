@@ -12,11 +12,11 @@ import java.util.List;
 /**
  * Created by Abhay on 10/05/2016.
  */
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder> {
+public class DataAdapter extends RecyclerView.Adapter<DataAdapter.RecyclerViewHolder> {
 
-    private List<Data> petData;
+    private static List<Data> petData;
 
-    public RecyclerAdapter(List<Data> petData) {
+    public DataAdapter(List<Data> petData) {
         this.petData = petData;
     }
 
