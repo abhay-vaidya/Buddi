@@ -6,7 +6,7 @@ package group.project.buddi;
  */
 public class Dog {
 
-    String name = "Hello";
+    String name;
 
     @Override
     public String toString() {
