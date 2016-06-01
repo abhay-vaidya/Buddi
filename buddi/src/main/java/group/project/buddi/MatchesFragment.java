@@ -51,7 +51,7 @@ public class MatchesFragment extends Fragment {
 
     private List<Data> createList() {
 
-        Ion.with(this)
+        Ion.with(getActivity())
                 .load("http://animalservices.planet404.com/api/v1/dogs")
                 .asJsonArray()
                 .setCallback(new FutureCallback<JsonArray>() {
@@ -61,6 +61,7 @@ public class MatchesFragment extends Fragment {
                         for (int i=0; i<result.size(); i++) {
                             JsonObject dog = result.get(i).getAsJsonObject();
 //                            textView.append(dog.get("name").getAsString() + '\n' + dog.get("reference_num").getAsString() + "\n\n");
+                            Toast.makeText(getActivity(), dog.get("name").getAsString(), Toast.LENGTH_SHORT).show();
 
                             Data ci = new Data();
                             ci.name = dog.get("name").getAsString();
