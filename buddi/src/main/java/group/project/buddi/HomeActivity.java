@@ -11,6 +11,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import java.io.IOException;
+import java.util.List;
+
+import group.project.buddi.network.Dog;
+import group.project.buddi.network.DogService;
+import group.project.buddi.network.ServiceGenerator;
+import retrofit2.Call;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -41,6 +50,28 @@ public class HomeActivity extends AppCompatActivity {
 
         // Find our navigation view
         nvDrawer = (NavigationView) findViewById(R.id.nav_view);
+
+
+
+
+        //  REST API
+        DogService client = ServiceGenerator.createService(DogService.class);
+
+        Call<List<Dog>> call = client.dogs("1");
+
+        List<Dog> dogs = null;
+        try {
+            dogs = call.execute().body();
+        } catch (IOException e) {
+            // handle errors
+        }
+
+        for (Dog dog : dogs) {
+            Toast.makeText(HomeActivity.this, dog.toString(), Toast.LENGTH_SHORT).show();
+        }
+
+
+
 
         // Setup drawer view
         setupDrawerContent(nvDrawer);
