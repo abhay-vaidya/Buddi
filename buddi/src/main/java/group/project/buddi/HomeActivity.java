@@ -11,14 +11,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Toast;
-
-import java.io.IOException;
-import java.util.List;
-
-import group.project.buddi.network.Dog;
-import group.project.buddi.network.DogService;
-import group.project.buddi.network.ServiceGenerator;
 
 public class HomeActivity extends AppCompatActivity {
 

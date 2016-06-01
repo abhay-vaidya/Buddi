@@ -64,4 +64,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         }
     }
 
+    public void swap(List list){
+        if (petData != null) {
+            petData.clear();
+            petData.addAll(list);
+        }
+        else {
+            petData = list;
+        }
+        notifyDataSetChanged();
+    }
+
 }
+
+

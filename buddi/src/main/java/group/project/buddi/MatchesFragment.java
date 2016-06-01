@@ -28,6 +28,7 @@ import group.project.buddi.helper.SwipeHelper;
 public class MatchesFragment extends Fragment {
 
     List<Data> dogs = new ArrayList<Data>();
+    RecyclerAdapter ra;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,18 +37,19 @@ public class MatchesFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_matches, container, false);
 
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.petList);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        RecyclerAdapter ra = new RecyclerAdapter(createList());
+        ra = new RecyclerAdapter(createList());
+        ra.swap(dogs);
+
+
         recyclerView.setAdapter(ra);
         ItemTouchHelper.Callback callback = new SwipeHelper(ra);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerView);
+
         return rootView;
     }
-
-
 
     private List<Data> createList() {
 
@@ -76,7 +78,6 @@ public class MatchesFragment extends Fragment {
                         }
                     }
                 });
-
         return dogs;
     }
 }
