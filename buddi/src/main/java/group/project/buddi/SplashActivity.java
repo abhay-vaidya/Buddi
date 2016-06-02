@@ -1,5 +1,6 @@
 package group.project.buddi;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -10,6 +11,11 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        // Shared preferences for later
+        Context context = SplashActivity.this;
+        final SharedPreferences sharedPref = context.getSharedPreferences(
+                getString(R.string.oauth), Context.MODE_PRIVATE);
 
         Thread t = new Thread(new Runnable() {
             @Override
@@ -36,10 +42,16 @@ public class SplashActivity extends AppCompatActivity {
 
                     //  Apply changes
                     e.apply();
-                }
-                else {
+                } else if ( !sharedPref.getBoolean("is_logged_in", false) ) {
+
                     Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(i);
+
+                } else {
+
+                    Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                    startActivity(i);
+
                 }
             }
         });

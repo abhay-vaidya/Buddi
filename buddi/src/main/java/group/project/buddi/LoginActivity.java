@@ -158,6 +158,15 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
         isLoggedin = true;
+
+        Context context = LoginActivity.this;
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                getString(R.string.oauth), Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean("is_logged_in", isLoggedin);
+        editor.commit();
+
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
         finish();
