@@ -10,6 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -79,6 +84,23 @@ public class LoginActivity extends AppCompatActivity {
         String client_secret = "4c7f6f8fa93d59c45502c0ae8c4a95b";
 
         // TODO: Implement your own authentication logic here.
+
+        Ion.with(this)
+                .load("http://ec2-52-91-255-81.compute-1.amazonaws.com/oauth/access_token")
+                .setBodyParameter("grant_type", grant_type)
+                .setBodyParameter("client_id", client_id)
+                .setBodyParameter("client_secret", client_secret)
+                .setBodyParameter("username", username)
+                .setBodyParameter("password", password)
+                .asString()
+                .setCallback(new FutureCallback<String>() {
+                    @Override
+                    public void onCompleted(Exception e, String result) {
+
+                        Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();
+
+                    }
+                });
 
 
         new android.os.Handler().postDelayed(
