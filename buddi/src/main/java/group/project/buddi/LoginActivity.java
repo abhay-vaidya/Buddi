@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import butterknife.ButterKnife;
 import butterknife.Bind;
 
@@ -78,8 +81,6 @@ public class LoginActivity extends AppCompatActivity {
         // TODO: Implement your own authentication logic here.
 
 
-
-
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
@@ -128,9 +129,10 @@ public class LoginActivity extends AppCompatActivity {
         String username = _usernameText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        String regex = "/^[a-zA-Z0-9-_]+$/";
+        Pattern p = Pattern.compile("/^[a-zA-Z0-9-_]+$/");
+        Matcher m = p.matcher(username);
 
-        if (username.isEmpty() || !username.matches(regex)) {
+        if ( username.isEmpty() || !m.matches() ) {
             _usernameText.setError("Enter a valid username");
             valid = false;
         } else {
