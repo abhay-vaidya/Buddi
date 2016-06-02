@@ -25,6 +25,7 @@ import butterknife.Bind;
 
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
+    private boolean signupSuccess = false;
 
     @Bind(R.id.input_name) EditText _nameText;
     @Bind(R.id.input_email) EditText _emailText;
@@ -93,20 +94,14 @@ public class SignupActivity extends AppCompatActivity {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
 
-                        if (result.get("error").getAsString() != "Malformed request.") {
-
-                            /* STORE IN SHARED PREFERENCES */
-                            /*SharedPreferences sharedPref = context.getSharedPreferences(
-                                    getString(R.string.oauth), Context.MODE_PRIVATE);
-
-                            SharedPreferences.Editor editor = sharedPref.edit();
-                            editor.putString("username", username);
-                            editor.putString("password", password);
-                            editor.commit();*/
+                        if (result.get("message").getAsString() != "Malformed request.") {
 
                             Toast.makeText(context, result.get("message").getAsString(), Toast.LENGTH_SHORT).show();
+                            signupSuccess = true;
+
                         } else {
                             Toast.makeText(context, "User exists already.", Toast.LENGTH_SHORT).show();
+                            signupSuccess = false;
                         }
 
                     }
@@ -128,11 +123,13 @@ public class SignupActivity extends AppCompatActivity {
 
 
     public void onSignupSuccess() {
-        _signupButton.setEnabled(true);
-        setResult(RESULT_OK, null);
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
-        finish();
+        if (signupSuccess) {
+            _signupButton.setEnabled(true);
+            setResult(RESULT_OK, null);
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     public void onSignupFailed() {
