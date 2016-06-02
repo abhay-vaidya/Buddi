@@ -31,7 +31,6 @@ public class SwipeHelper extends ItemTouchHelper.SimpleCallback{
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-        adapter.dismissPet(viewHolder.getAdapterPosition());
-
+        // ADD CODE FOR WHEN PET SWIPED AWAY
     }
 }
