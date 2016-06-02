@@ -1,5 +1,7 @@
 package group.project.buddi;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -59,8 +61,12 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
     }
 
     private void loadJSON() {
+        Context context = getActivity();
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                getString(R.string.oauth), Context.MODE_PRIVATE);
+
         Ion.with(getActivity())
-                .load("http://animalservices.planet404.com/api/v1/dogs")
+                .load("http://ec2-52-91-255-81.compute-1.amazonaws.com/api/v1/dogs?access_token=" + sharedPref.getString("auth_token", "broke"))
                 .asJsonArray()
                 .setCallback(new FutureCallback<JsonArray>() {
                     @Override
