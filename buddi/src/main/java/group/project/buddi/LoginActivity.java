@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
     public boolean isLoggedin = false;
+    public boolean canProceed = false;
     public String auth_token;
 
     @Bind(R.id.input_username) EditText _usernameText;
@@ -108,18 +109,26 @@ public class LoginActivity extends AppCompatActivity {
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
-                        auth_token = result.get("access_token").getAsString();
 
-                        /* STORE IN SHARED PREFERENCES */
-                        Context context = LoginActivity.this;
-                        SharedPreferences sharedPref = context.getSharedPreferences(
-                                getString(R.string.oauth), Context.MODE_PRIVATE);
+                        try {
+                            auth_token = result.get("access_token").getAsString();
 
-                        SharedPreferences.Editor editor = sharedPref.edit();
-                        editor.putString("auth_token", auth_token);
-                        editor.commit();
+                           /* STORE IN SHARED PREFERENCES */
+                            Context context = LoginActivity.this;
+                            SharedPreferences sharedPref = context.getSharedPreferences(
+                                    getString(R.string.oauth), Context.MODE_PRIVATE);
 
-                        Toast.makeText(LoginActivity.this, sharedPref.getString("auth_token", "broke"), Toast.LENGTH_SHORT).show();
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putString("auth_token", auth_token);
+                            editor.commit();
+                            canProceed = true;
+
+                           // Toast.makeText(LoginActivity.this, sharedPref.getString("auth_token", "broke"), Toast.LENGTH_SHORT).show();
+                        }catch (Exception x){
+
+                        }
+
+
 
                     }
                 });
@@ -129,11 +138,13 @@ public class LoginActivity extends AppCompatActivity {
                 new Runnable() {
                     public void run() {
                         // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
+                        if (canProceed) {
+                            onLoginSuccess();
+                        } else onLoginFailed();
+
                         progressDialog.dismiss();
                     }
-                }, 3000);
+                }, 1500);
     }
 
 
@@ -174,6 +185,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginFailed() {
         _loginButton.setEnabled(true);
+        Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
     }
 
     public boolean validate() {

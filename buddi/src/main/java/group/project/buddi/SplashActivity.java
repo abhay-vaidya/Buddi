@@ -33,6 +33,7 @@ public class SplashActivity extends AppCompatActivity {
                     //  Launch app intro
                     Intent i = new Intent(getApplicationContext(), IntroSlides.class);
                     startActivity(i);
+                    finish();
 
                     //  Make a new preferences editor
                     SharedPreferences.Editor e = getPrefs.edit();
@@ -46,12 +47,13 @@ public class SplashActivity extends AppCompatActivity {
 
                     Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(i);
+                    finish();
 
                 } else {
 
                     Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                     startActivity(i);
-
+                    finish();
                 }
             }
         });

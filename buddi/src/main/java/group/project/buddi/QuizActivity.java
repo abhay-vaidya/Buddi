@@ -31,6 +31,7 @@ public class QuizActivity extends AppCompatActivity {
         mSeekHealth = (SeekBar)findViewById(R.id.seekBarHealthiness);
 
         nextButton = (Button)findViewById(R.id.nextButton);
+        nextButton.setElevation(0);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
