@@ -92,12 +92,12 @@ public class LoginActivity extends AppCompatActivity {
                 .setBodyParameter("client_secret", client_secret)
                 .setBodyParameter("username", username)
                 .setBodyParameter("password", password)
-                .asString()
-                .setCallback(new FutureCallback<String>() {
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
                     @Override
-                    public void onCompleted(Exception e, String result) {
+                    public void onCompleted(Exception e, JsonObject result) {
 
-                        Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, result.get("access_token").getAsString(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
