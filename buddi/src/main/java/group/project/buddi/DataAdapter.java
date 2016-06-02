@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -45,8 +46,8 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.RecyclerViewHo
     }
 
     public void dismissPet(int pos){
-        petData.remove(pos);
-        this.notifyItemRemoved(pos);
+       petData.remove(pos);
+       this.notifyItemRemoved(pos);
     }
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder{

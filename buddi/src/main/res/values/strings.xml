@@ -2,6 +2,7 @@
     <string name="app_name">Buddi</string>
     <string name="title_activity_login">Log In</string>
     <string name="title_activity_signup">Sign Up</string>
+    <string name="title_activity_quiz">Let\'s learn a little about you...</string>
     <string name="app_intro">Setup</string>
 
     <!-- Strings related to login -->
@@ -25,7 +26,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    
+
     <string name="oauth">buddi_oauth</string>
 
 </resources>

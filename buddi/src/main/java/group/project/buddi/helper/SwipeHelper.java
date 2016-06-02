@@ -2,6 +2,7 @@ package group.project.buddi.helper;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.widget.Toast;
 
 import group.project.buddi.DataAdapter;
 
@@ -31,6 +32,8 @@ public class SwipeHelper extends ItemTouchHelper.SimpleCallback{
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-        // ADD CODE FOR WHEN PET SWIPED AWAY
+      adapter.dismissPet(viewHolder.getAdapterPosition());
+      adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+
     }
 }

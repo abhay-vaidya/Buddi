@@ -48,14 +48,32 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
         mRecyclerPets.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-        ItemTouchHelper.Callback callback = new SwipeHelper(mAdapter);
+/*        ItemTouchHelper.Callback callback = new SwipeHelper(mAdapter);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
-        helper.attachToRecyclerView(mRecyclerPets);
+        helper.attachToRecyclerView(mRecyclerPets);*/
 
         loadJSON();
 
         mAdapter = new DataAdapter(mData);
         mRecyclerPets.setAdapter(mAdapter);
+
+        // init swipe to dismiss logic
+        ItemTouchHelper swipeToDismissTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                // callback for drag-n-drop, false to skip this feature
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                // callback for swipe to dismiss, removing item from data and adapter
+                mData.remove(viewHolder.getAdapterPosition());
+                mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+            }
+        });
+        swipeToDismissTouchHelper.attachToRecyclerView(mRecyclerPets);
 
         return rootView;
     }
@@ -98,7 +116,9 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     @Override
     public void onRefresh() {
-        mAdapter.notifyDataSetChanged();
         mSwipeRefreshLayout.setRefreshing(false);
+        mData.clear();
+        loadJSON();
+        mAdapter.notifyDataSetChanged();
     }
 }

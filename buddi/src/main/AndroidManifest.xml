@@ -5,11 +5,12 @@
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
-    <supports-screens android:resizeable="true"
-    android:anyDensity="true" />
+    <supports-screens
+        android:anyDensity="true"
+        android:resizeable="true" />
 
     <application
         android:allowBackup="true"
@@ -18,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="group.project.buddi.SplashActivity"
+            android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,20 +28,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="group.project.buddi.LoginActivity"
+            android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="group.project.buddi.SignupActivity"
+            android:name=".SignupActivity"
             android:label="@string/title_activity_signup"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".IntroSlides"
             android:label="@string/app_intro" />
         <activity
-            android:name="group.project.buddi.HomeActivity"
+            android:name=".HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".QuizActivity"
+            android:label="@string/title_activity_quiz" />
+
     </application>
 
 </manifest>
