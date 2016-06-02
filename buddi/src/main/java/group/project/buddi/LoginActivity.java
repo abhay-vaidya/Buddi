@@ -19,7 +19,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final int REQUEST_SIGNUP = 0;
     public boolean isLoggedin = false;
 
-    @Bind(R.id.input_email) EditText _emailText;
+    @Bind(R.id.input_username) EditText _usernameText;
     @Bind(R.id.input_password) EditText _passwordText;
     @Bind(R.id.btn_login) Button _loginButton;
     @Bind(R.id.link_signup) TextView _signupLink;
@@ -69,10 +69,15 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        String email = _emailText.getText().toString();
+        String username = _usernameText.getText().toString();
         String password = _passwordText.getText().toString();
+        String grant_type = "password";
+        String client_id = "f3d259ddd3ed8ff3843839b";
+        String client_secret = "4c7f6f8fa93d59c45502c0ae8c4a95b";
 
         // TODO: Implement your own authentication logic here.
+
+
 
 
         new android.os.Handler().postDelayed(
@@ -120,14 +125,16 @@ public class LoginActivity extends AppCompatActivity {
     public boolean validate() {
         boolean valid = true;
 
-        String email = _emailText.getText().toString();
+        String username = _usernameText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            _emailText.setError("Enter a valid email address");
+        String regex = "/^[a-zA-Z0-9-_]+$/";
+
+        if (username.isEmpty() || !username.matches(regex)) {
+            _usernameText.setError("Enter a valid username");
             valid = false;
         } else {
-            _emailText.setError(null);
+            _usernameText.setError(null);
         }
 
         if (password.isEmpty() || password.length() < 4) {
