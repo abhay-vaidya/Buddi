@@ -1,7 +1,9 @@
 package group.project.buddi;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -9,6 +11,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.ButterKnife;
 import butterknife.Bind;
@@ -17,10 +27,13 @@ public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
 
     @Bind(R.id.input_name) EditText _nameText;
-    @Bind(R.id.input_username) EditText _emailText;
+    @Bind(R.id.input_email) EditText _emailText;
+    @Bind(R.id.input_username) EditText _usernameText;
     @Bind(R.id.input_password) EditText _passwordText;
     @Bind(R.id.btn_signup) Button _signupButton;
     @Bind(R.id.link_login) TextView _loginLink;
+
+    Context context = SignupActivity.this;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,10 +76,43 @@ public class SignupActivity extends AppCompatActivity {
         progressDialog.show();
 
         String name = _nameText.getText().toString();
+        String username = _usernameText.getText().toString();
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
         // TODO: Implement your own signup logic here.
+
+        Ion.with(context)
+                .load("http://ec2-52-91-255-81.compute-1.amazonaws.com/api/v1/users")
+                .setBodyParameter("name", name)
+                .setBodyParameter("email", email)
+                .setBodyParameter("username", username)
+                .setBodyParameter("password", password)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+
+                        if (result.get("error").getAsString() != "Malformed request.") {
+
+                            /* STORE IN SHARED PREFERENCES */
+                            /*SharedPreferences sharedPref = context.getSharedPreferences(
+                                    getString(R.string.oauth), Context.MODE_PRIVATE);
+
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putString("username", username);
+                            editor.putString("password", password);
+                            editor.commit();*/
+
+                            Toast.makeText(context, result.get("message").getAsString(), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(context, "User exists already.", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+
+
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -98,6 +144,7 @@ public class SignupActivity extends AppCompatActivity {
 
         String name = _nameText.getText().toString();
         String email = _emailText.getText().toString();
+        String username = _usernameText.getText().toString();
         String password = _passwordText.getText().toString();
 
         if (name.isEmpty() || name.length() < 3) {
@@ -112,6 +159,16 @@ public class SignupActivity extends AppCompatActivity {
             valid = false;
         } else {
             _emailText.setError(null);
+        }
+
+        Pattern p = Pattern.compile("^[a-zA-Z0-9-_]+$");
+        Matcher m = p.matcher(username);
+
+        if ( username.isEmpty() || !m.matches() ) {
+            _usernameText.setError("Enter a valid username");
+            valid = false;
+        } else {
+            _usernameText.setError(null);
         }
 
         if (password.isEmpty() || password.length() < 4) {
