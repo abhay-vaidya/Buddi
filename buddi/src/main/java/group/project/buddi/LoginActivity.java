@@ -129,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
         String username = _usernameText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        Pattern p = Pattern.compile("/^[a-zA-Z0-9-_]+$/");
+        Pattern p = Pattern.compile("^[a-zA-Z0-9-_]+$");
         Matcher m = p.matcher(username);
 
         if ( username.isEmpty() || !m.matches() ) {
