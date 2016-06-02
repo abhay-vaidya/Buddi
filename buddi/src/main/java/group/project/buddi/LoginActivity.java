@@ -1,6 +1,8 @@
 package group.project.buddi;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -26,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
     public boolean isLoggedin = false;
+    public String auth_token;
 
     @Bind(R.id.input_username) EditText _usernameText;
     @Bind(R.id.input_password) EditText _passwordText;
@@ -77,27 +80,46 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        String username = _usernameText.getText().toString();
-        String password = _passwordText.getText().toString();
-        String grant_type = "password";
-        String client_id = "f3d259ddd3ed8ff3843839b";
-        String client_secret = "4c7f6f8fa93d59c45502c0ae8c4a95b";
+
+        /* STORE IN SHARED PREFERENCES */
+        Context context = LoginActivity.this;
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                getString(R.string.oauth), Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("grant_type", "password");
+        editor.putString("client_id", "f3d259ddd3ed8ff3843839b");
+        editor.putString("client_secret", "4c7f6f8fa93d59c45502c0ae8c4a95b");
+        editor.putString("username", _usernameText.getText().toString());
+        editor.putString("password", _passwordText.getText().toString());
+        editor.commit();
+
 
         // TODO: Implement your own authentication logic here.
 
-        Ion.with(this)
+        Ion.with(context)
                 .load("http://ec2-52-91-255-81.compute-1.amazonaws.com/oauth/access_token")
-                .setBodyParameter("grant_type", grant_type)
-                .setBodyParameter("client_id", client_id)
-                .setBodyParameter("client_secret", client_secret)
-                .setBodyParameter("username", username)
-                .setBodyParameter("password", password)
+                .setBodyParameter("grant_type", sharedPref.getString("grant_type", null))
+                .setBodyParameter("client_id", sharedPref.getString("client_id", null))
+                .setBodyParameter("client_secret", sharedPref.getString("client_secret", null))
+                .setBodyParameter("username", sharedPref.getString("username", null))
+                .setBodyParameter("password", sharedPref.getString("password", null))
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
+                        auth_token = result.get("access_token").getAsString();
 
-                        Toast.makeText(LoginActivity.this, result.get("access_token").getAsString(), Toast.LENGTH_SHORT).show();
+                        /* STORE IN SHARED PREFERENCES */
+                        Context context = LoginActivity.this;
+                        SharedPreferences sharedPref = context.getSharedPreferences(
+                                getString(R.string.oauth), Context.MODE_PRIVATE);
+
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString("auth_token", auth_token);
+                        editor.commit();
+
+                        Toast.makeText(LoginActivity.this, "Access token stored.", Toast.LENGTH_SHORT).show();
 
                     }
                 });
