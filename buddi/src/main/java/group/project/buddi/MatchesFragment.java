@@ -4,6 +4,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -24,26 +25,35 @@ import com.koushikdutta.ion.Ion;
 import group.project.buddi.helper.SwipeHelper;
 
 
-public class MatchesFragment extends Fragment {
+public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    private List<Data> data = new ArrayList<Data>();
-    private DataAdapter adapter;
-    private RecyclerView recyclerView;
+    private List<Data> mData = new ArrayList<Data>();
+    private DataAdapter mAdapter;
+    private RecyclerView mRecyclerPets;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
         View rootView = inflater.inflate(R.layout.fragment_matches, container, false);
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.petList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeContainer);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+
+        mRecyclerPets = (RecyclerView) rootView.findViewById(R.id.petList);
+        mRecyclerPets.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-        ItemTouchHelper.Callback callback = new SwipeHelper(adapter);
+        ItemTouchHelper.Callback callback = new SwipeHelper(mAdapter);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
-        helper.attachToRecyclerView(recyclerView);
+        helper.attachToRecyclerView(mRecyclerPets);
 
         loadJSON();
+
+        mAdapter = new DataAdapter(mData);
+        mRecyclerPets.setAdapter(mAdapter);
 
         return rootView;
     }
@@ -69,13 +79,20 @@ public class MatchesFragment extends Fragment {
                             Drawable drawable = res.getDrawable(R.drawable.dog);
                             ci.image = drawable;
 
-                            data.add(ci);
+                            mData.add(ci);
 
                         }
 
-                        adapter = new DataAdapter(data);
-                        recyclerView.setAdapter(adapter);
+                        mAdapter = new DataAdapter(mData);
+                        mRecyclerPets.setAdapter(mAdapter);
+
                     }
                 });
+    }
+
+    @Override
+    public void onRefresh() {
+        mAdapter.notifyDataSetChanged();
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 }

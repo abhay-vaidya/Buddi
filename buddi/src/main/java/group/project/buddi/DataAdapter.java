@@ -64,6 +64,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.RecyclerViewHo
         }
     }
 
+
     public void swap(List list){
         if (petData != null) {
             petData.clear();
