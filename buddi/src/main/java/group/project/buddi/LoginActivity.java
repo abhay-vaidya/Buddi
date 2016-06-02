@@ -119,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("auth_token", auth_token);
                         editor.commit();
 
-                        Toast.makeText(LoginActivity.this, "Access token stored.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, auth_token, Toast.LENGTH_SHORT).show();
 
                     }
                 });
