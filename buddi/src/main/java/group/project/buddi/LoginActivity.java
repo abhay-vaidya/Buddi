@@ -119,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("auth_token", auth_token);
                         editor.commit();
 
-                        Toast.makeText(LoginActivity.this, auth_token, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, sharedPref.getString("auth_token", "broke"), Toast.LENGTH_SHORT).show();
 
                     }
                 });
