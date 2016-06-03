@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
+    android:layout_height="match_parent"
+    tools:context="group.project.buddi.RankingActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Hold and drag to order these attributes."
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:layout_marginTop="16dp"
+        android:paddingTop="16dp"
+        android:id="@+id/rankingTitle"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Rank how important each attribute is to you with the top-most being the most important."
+        android:layout_below="@+id/rankingTitle"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:paddingTop="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:id="@+id/rankingSubtitle"
+        android:layout_centerHorizontal="true" />
+
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/attributeCards"
+        android:layout_width="290dp"
+        android:layout_height="380dp"
+        android:layout_marginTop="156dp"
+        android:layout_marginRight="12dp"
+        android:layout_alignParentEnd="true" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="380dp"
+        android:orientation="vertical"
+        android:layout_marginTop="156dp"
+        android:layout_marginLeft="12dp"
+>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="1"
+            android:padding="16dp"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="24dp"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white"
+            android:text="2" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="44dp"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white"
+            android:text="3" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:paddingTop="42dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="4" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:textColor="@color/white"
+            android:paddingTop="42dp"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="5" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="16dp"
+        android:text="Finish"
+        android:id="@+id/finishButton"
+        android:backgroundTint="@color/colorAccent"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/rankingTitle" />
+
+
+</RelativeLayout>

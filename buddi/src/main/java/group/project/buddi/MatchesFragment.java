@@ -47,11 +47,6 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
         mRecyclerPets = (RecyclerView) rootView.findViewById(R.id.petList);
         mRecyclerPets.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
-/*        ItemTouchHelper.Callback callback = new SwipeHelper(mAdapter);
-        ItemTouchHelper helper = new ItemTouchHelper(callback);
-        helper.attachToRecyclerView(mRecyclerPets);*/
-
         loadJSON();
 
         mAdapter = new DataAdapter(mData);

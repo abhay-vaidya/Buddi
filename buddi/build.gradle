@@ -41,4 +41,9 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.koushikdutta.ion:ion:2.+'
+
+    compile ('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.9.1@aar'){
+        transitive=true
+    }
+
 }
