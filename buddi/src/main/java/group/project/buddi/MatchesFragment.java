@@ -78,8 +78,10 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
         SharedPreferences sharedPref = context.getSharedPreferences(
                 getString(R.string.oauth), Context.MODE_PRIVATE);
 
+        String code = sharedPref.getString("code", "A0B0C0D0E0");
+
         Ion.with(getActivity())
-                .load("http://ec2-52-91-255-81.compute-1.amazonaws.com/api/v1/dogs?access_token=" + sharedPref.getString("auth_token", "broke"))
+                .load("http://ec2-52-91-255-81.compute-1.amazonaws.com/api/v1/feed/" + code + "?access_token=" + sharedPref.getString("auth_token", "broke"))
                 .asJsonArray()
                 .setCallback(new FutureCallback<JsonArray>() {
                     @Override
