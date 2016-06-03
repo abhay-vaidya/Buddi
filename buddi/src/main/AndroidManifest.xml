@@ -56,7 +56,14 @@
             android:label="@string/title_activity_quiz"
             android:screenOrientation="portrait" />
         <activity android:name=".RankingActivity" />
-        <activity android:name=".DetailsActivity"></activity>
+        <activity android:name=".DetailsActivity"
+            android:label="Pet Details"
+            android:parentActivityName=".HomeActivity" >
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
     </application>
 
 </manifest>
