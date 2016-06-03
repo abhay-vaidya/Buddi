@@ -40,6 +40,10 @@ public class DetailsActivity extends AppCompatActivity {
 
     Button phoneButton;
     String phoneNumber;
+    Button mapButton;
+    String locationName;
+    String latitude;
+    String longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +65,6 @@ public class DetailsActivity extends AppCompatActivity {
         imageDeclawed = (ImageView)findViewById(R.id.imageDeclawed);
 
         phoneButton = (Button)findViewById(R.id.phoneButton);
-
         phoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +85,21 @@ public class DetailsActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(DetailsActivity.this, "Phone number invalid.", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+
+        mapButton = (Button)findViewById(R.id.locationButton);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Creates an Intent that will load a map of San Francisco
+                Uri gmmIntentUri = Uri.parse("geo:" + latitude + "," + longitude + "?q=" + locationName);
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
+
             }
         });
 
@@ -107,6 +125,9 @@ public class DetailsActivity extends AppCompatActivity {
                     public void onCompleted(Exception e, JsonObject dog) {
 
                         phoneNumber = dog.get("location").getAsJsonObject().get("phone_num").getAsString();
+                        locationName = dog.get("location").getAsJsonObject().get("name").getAsString();
+                        latitude = dog.get("location").getAsJsonObject().get("lat").getAsString();
+                        longitude = dog.get("location").getAsJsonObject().get("long").getAsString();
 
                         petName.setText( dog.get("name").getAsString() + "\n(" + dog.get("reference_num").getAsString() + ")");
                         petAge.setText( dog.get("age").getAsString() + " years old");

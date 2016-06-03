@@ -264,13 +264,14 @@
                 android:layout_below="@+id/petIntakeDate" />
 
         </LinearLayout>
-        
+
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:layout_below="@+id/petAttributes"
             android:weightSum="2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            
+
             <Button
                 android:id="@+id/locationButton"
                 android:text="View Location"
