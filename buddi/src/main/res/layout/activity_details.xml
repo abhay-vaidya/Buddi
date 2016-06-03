@@ -74,13 +74,98 @@
             android:layout_below="@+id/petBreed"
             android:layout_centerHorizontal="true"/>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/petDescription"
+            android:orientation="vertical"
+            android:layout_marginTop="24dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_color_lens_black_24dp"
+                android:tint="@color/colorPrimaryDark"
+                android:layout_alignStart="@+id/petColour"
+                android:id="@+id/imageColour"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_accessibility_black_24dp"
+                android:tint="@color/colorPrimaryDark"
+                android:layout_alignStart="@+id/petColour"
+                android:paddingTop="12dp"
+                android:id="@+id/imageGender"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_aspect_ratio_black_24dp"
+                android:tint="@color/colorPrimaryDark"
+                android:layout_alignStart="@+id/petColour"
+                android:paddingTop="14dp"
+                android:id="@+id/imageSize"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_check_circle_black_24dp"
+                android:tint="@color/colorPrimaryDark"
+                android:layout_alignStart="@+id/petColour"
+                android:paddingTop="14dp"
+                android:id="@+id/imageDeclawed"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_check_circle_black_24dp"
+                android:tint="@color/colorPrimaryDark"
+                android:layout_alignStart="@+id/petColour"
+                android:paddingTop="14dp"
+                android:id="@+id/imageNeutered"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_date_range_black_24dp"
+                android:paddingTop="14dp"
+                android:tint="@color/colorPrimaryDark"
+                android:layout_alignStart="@+id/petColour"
+                android:id="@+id/imageIntakeDate"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_child_friendly_black_24dp"
+                android:tint="@color/colorPrimaryDark"
+                android:layout_alignStart="@+id/petColour"
+                android:id="@+id/imageSpecial"
+                android:paddingTop="12dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true" />
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_below="@+id/petDescription"
+            android:layout_marginLeft="36dp"
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -90,8 +175,12 @@
                 android:text="Hazel"
                 android:textSize="18sp"
                 android:padding="8dp"
+
                 android:id="@+id/petColour"
-                android:layout_below="@+id/petDescription" />
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+
 
             <TextView
                 android:layout_width="wrap_content"
