@@ -27,6 +27,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.RecyclerViewHo
     public DataAdapter(Context context, List<Data> petData) {
 
         this.petData = petData;
+        this.context = context;
     }
 
 
@@ -49,9 +50,8 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.RecyclerViewHo
         recyclerViewHolder.vButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,
-                        "SUCCESS",
-                        Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(context, DetailsActivity.class);
+                context.startActivity(intent);
             }
         });
     }

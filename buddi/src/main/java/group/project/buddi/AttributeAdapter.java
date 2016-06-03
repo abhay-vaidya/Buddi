@@ -33,6 +33,8 @@ public class AttributeAdapter extends RecyclerView.Adapter<AttributeAdapter.Recy
 
     }
 
+    public List<String> getAttributes() { return attributes; }
+
     public boolean onItemMove(int fromPosition, int toPosition) {
         if (fromPosition < toPosition) {
             for (int i = fromPosition; i < toPosition; i++) {
