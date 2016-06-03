@@ -20,6 +20,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,21 +30,26 @@
         </activity>
         <activity
             android:name=".LoginActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".SignupActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_signup"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".IntroSlides"
+            android:screenOrientation="portrait"
             android:label="@string/app_intro" />
         <activity
             android:name=".HomeActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".QuizActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_quiz" />
         <activity android:name=".RankingActivity"></activity>
     </application>
