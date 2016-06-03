@@ -1,5 +1,6 @@
 package group.project.buddi;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
 import android.provider.ContactsContract;
@@ -21,8 +22,10 @@ import java.util.List;
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.RecyclerViewHolder> {
 
     private static List<Data> petData;
+    private Context context;
 
-    public DataAdapter(List<Data> petData) {
+    public DataAdapter(Context context, List<Data> petData) {
+
         this.petData = petData;
     }
 
@@ -42,6 +45,15 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.RecyclerViewHo
         recyclerViewHolder.vAge.setText(d.age);
         recyclerViewHolder.vBreed.setText(d.breed);
         recyclerViewHolder.vImage.setImageDrawable(d.image);
+
+        recyclerViewHolder.vButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context,
+                        "SUCCESS",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public RecyclerViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {

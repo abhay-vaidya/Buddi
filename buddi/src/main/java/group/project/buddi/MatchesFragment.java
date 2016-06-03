@@ -53,7 +53,7 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
         loadJSON();
 
-        mAdapter = new DataAdapter(mData);
+        mAdapter = new DataAdapter(getActivity(), mData);
         mRecyclerPets.setAdapter(mAdapter);
 
         // init swipe to dismiss logic
@@ -109,7 +109,7 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
                         }
 
-                        mAdapter = new DataAdapter(mData);
+                        mAdapter = new DataAdapter(getActivity(), mData);
                         mRecyclerPets.setAdapter(mAdapter);
 
                     }
