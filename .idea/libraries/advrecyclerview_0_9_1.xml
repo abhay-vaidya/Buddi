@@ -1,5 +1,8 @@
 <component name="libraryTable">
   <library name="advrecyclerview-0.9.1">
+    <ANNOTATIONS>
+      <root url="jar://$PROJECT_DIR$/buddi/build/intermediates/exploded-aar/com.h6ah4i.android.widget.advrecyclerview/advrecyclerview/0.9.1/annotations.zip!/" />
+    </ANNOTATIONS>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/buddi/build/intermediates/exploded-aar/com.h6ah4i.android.widget.advrecyclerview/advrecyclerview/0.9.1/res" />
       <root url="jar://$PROJECT_DIR$/buddi/build/intermediates/exploded-aar/com.h6ah4i.android.widget.advrecyclerview/advrecyclerview/0.9.1/jars/classes.jar!/" />

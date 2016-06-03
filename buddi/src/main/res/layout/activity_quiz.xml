@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/seekBarNoise"
-        android:max="10" />
+        android:max="9" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/seekBarActive"
-        android:max="10" />
+        android:max="9" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -101,7 +101,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/seekBarFriendliness"
-        android:max="10" />
+        android:max="9" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -132,7 +132,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/seekBarTraining"
-        android:max="10" />
+        android:max="9" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -164,7 +164,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/seekBarHealthiness"
         android:paddingBottom="16dp"
-        android:max="10" />
+        android:max="9" />
 
     <Button
         android:layout_width="100dp"
