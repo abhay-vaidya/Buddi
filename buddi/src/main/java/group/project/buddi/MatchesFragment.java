@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,10 +16,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.JsonArray;
@@ -52,9 +56,6 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
 
         loadJSON();
-
-        mAdapter = new DataAdapter(getActivity(), mData);
-        mRecyclerPets.setAdapter(mAdapter);
 
         // init swipe to dismiss logic
         ItemTouchHelper swipeToDismissTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
@@ -94,8 +95,6 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
                         for (int i=0; i<result.size(); i++) {
                             JsonObject dog = result.get(i).getAsJsonObject();
-//                            textView.append(dog.get("name").getAsString() + '\n' + dog.get("reference_num").getAsString() + "\n\n");
-//                            Toast.makeText(getActivity(), dog.get("name").getAsString(), Toast.LENGTH_SHORT).show();
 
                             Data ci = new Data();
                             ci.id = dog.get("id").getAsInt();
@@ -123,5 +122,14 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
         mData.clear();
         loadJSON();
         mAdapter.notifyDataSetChanged();
+    }
+
+    public static Drawable loadImage(String url) {
+        try {
+            Drawable d = Drawable.createFromPath(url);
+            return d;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

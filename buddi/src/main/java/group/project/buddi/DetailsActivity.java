@@ -53,7 +53,6 @@ public class DetailsActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             int id = extras.getInt("pet_id");
-            Toast.makeText(this, String.valueOf(id), Toast.LENGTH_SHORT).show();
             loadJSON(id);
         }
 
@@ -73,7 +72,7 @@ public class DetailsActivity extends AppCompatActivity {
                     public void onCompleted(Exception e, JsonObject dog) {
 
                         petName.setText( dog.get("name").getAsString() + "\n(" + dog.get("reference_num").getAsString() + ")");
-                        petAge.setText( dog.get("age").getAsString() + "years old");
+                        petAge.setText( dog.get("age").getAsString() + " years old");
                         petBreed.setText( dog.get("breed").getAsString() );
                         petDescription.setText( dog.get("description").getAsString() );
                         petColor.setText( dog.get("color").getAsString() );

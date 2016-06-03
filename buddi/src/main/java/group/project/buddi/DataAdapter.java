@@ -23,7 +23,8 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.RecyclerViewHo
 
     private static List<Data> petData;
     private Context context;
-    private int id;
+
+    private boolean test = false;
 
     public DataAdapter(Context context, List<Data> petData) {
 
@@ -41,22 +42,23 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.RecyclerViewHo
 
 
     @Override
-    public void onBindViewHolder(RecyclerViewHolder recyclerViewHolder, int i) {
-        Data d = petData.get(i);
+    public void onBindViewHolder(final RecyclerViewHolder recyclerViewHolder, int i) {
+        final Data d = petData.get(recyclerViewHolder.getAdapterPosition());
         recyclerViewHolder.vName.setText(d.name);
         recyclerViewHolder.vAge.setText(d.age);
         recyclerViewHolder.vBreed.setText(d.breed);
         recyclerViewHolder.vImage.setImageDrawable(d.image);
 
-        id = d.id;
+//        Toast.makeText(context, String.valueOf(recyclerViewHolder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
 
         recyclerViewHolder.vButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, DetailsActivity.class);
-                Toast.makeText(context, String.valueOf(id), Toast.LENGTH_SHORT).show();
-                intent.putExtra("pet_id", id);
+
+                Intent intent = new Intent(v.getContext(), DetailsActivity.class);
+                intent.putExtra("pet_id", d.id);
                 context.startActivity(intent);
+
             }
         });
     }
@@ -117,7 +119,6 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.RecyclerViewHo
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
-                    Toast.makeText(v.getContext(), "SUCCESS", Toast.LENGTH_SHORT).show();
                 }
             });
         }

@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Jerry"
+            android:gravity="center"
             android:textStyle="bold"
             android:paddingTop="16dp"
             android:textColor="#FFF"
@@ -48,6 +49,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#FFF"
             android:text="7 weeks old"
+            android:gravity="center"
             android:textSize="18sp"
             android:id="@+id/petAge"
             android:layout_below="@+id/petName"
@@ -59,6 +61,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#FFF"
             android:text="Golden Retriever"
+            android:gravity="center"
+            android:textStyle="bold|italic"
             android:textSize="12sp"
             android:id="@+id/petBreed"
             android:layout_below="@+id/petAge"
@@ -70,6 +74,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#FFF"
             android:text="This is a very nice and fun dog."
+            android:gravity="center"
             android:textSize="12sp"
             android:id="@+id/petDescription"
             android:layout_below="@+id/petBreed"
@@ -83,6 +88,8 @@
             android:layout_marginTop="24dp">
 
             <ImageView
+                android:paddingTop="4dp"
+                android:paddingBottom="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_color_lens_black_24dp"
@@ -93,6 +100,7 @@
                 android:layout_alignParentTop="true" />
 
             <ImageView
+                android:paddingBottom="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_accessibility_black_24dp"
@@ -103,6 +111,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentTop="true" />
             <ImageView
+                android:paddingBottom="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_aspect_ratio_black_24dp"
@@ -114,6 +123,7 @@
                 android:layout_alignParentTop="true" />
 
             <ImageView
+                android:paddingBottom="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_check_circle_black_24dp"
@@ -125,6 +135,7 @@
                 android:layout_alignParentTop="true" />
 
             <ImageView
+                android:paddingBottom="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_check_circle_black_24dp"
@@ -136,6 +147,7 @@
                 android:layout_alignParentTop="true" />
 
             <ImageView
+                android:paddingBottom="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_date_range_black_24dp"
@@ -147,6 +159,7 @@
                 android:layout_alignParentTop="true" />
 
             <ImageView
+                android:paddingBottom="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_child_friendly_black_24dp"
