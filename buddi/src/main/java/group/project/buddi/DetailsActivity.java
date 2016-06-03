@@ -1,11 +1,16 @@
 package group.project.buddi;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,6 +20,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
+
+import java.security.Permission;
+import java.util.jar.Manifest;
 
 public class DetailsActivity extends AppCompatActivity {
 
@@ -29,6 +37,9 @@ public class DetailsActivity extends AppCompatActivity {
     TextView petSpecialNeeds;
     ImageView imageNeutered;
     ImageView imageDeclawed;
+
+    Button phoneButton;
+    String phoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +60,30 @@ public class DetailsActivity extends AppCompatActivity {
         imageNeutered = (ImageView)findViewById(R.id.imageNeutered);
         imageDeclawed = (ImageView)findViewById(R.id.imageDeclawed);
 
+        phoneButton = (Button)findViewById(R.id.phoneButton);
+
+        phoneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                Context context = DetailsActivity.this;
+
+                if ( !phoneNumber.isEmpty() && phoneNumber.matches("\\d{10}") ) {
+                    intent.setData(Uri.parse("tel:" + phoneNumber));
+
+                    int hasPermission = checkCallingOrSelfPermission("android.permission.CALL_PHONE");
+                    if (hasPermission == PackageManager.PERMISSION_GRANTED) {
+                        context.startActivity(intent);
+                    } else {
+                        Toast.makeText(DetailsActivity.this, "Permission to access phone not enabled.", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+                    Toast.makeText(DetailsActivity.this, "Phone number invalid.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -70,6 +105,8 @@ public class DetailsActivity extends AppCompatActivity {
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject dog) {
+
+                        phoneNumber = dog.get("location").getAsJsonObject().get("phone_num").getAsString();
 
                         petName.setText( dog.get("name").getAsString() + "\n(" + dog.get("reference_num").getAsString() + ")");
                         petAge.setText( dog.get("age").getAsString() + " years old");

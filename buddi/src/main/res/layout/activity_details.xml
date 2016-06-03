@@ -173,6 +173,7 @@
 
 
         <LinearLayout
+            android:id="@+id/petAttributes"
             android:layout_below="@+id/petDescription"
             android:layout_marginLeft="36dp"
             android:layout_marginTop="16dp"
@@ -261,6 +262,30 @@
                 android:padding="8dp"
                 android:id="@+id/petSpecialNeeds"
                 android:layout_below="@+id/petIntakeDate" />
+
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_below="@+id/petAttributes"
+            android:weightSum="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            
+            <Button
+                android:id="@+id/locationButton"
+                android:text="View Location"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/phoneButton"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/green"
+                android:text="Phone Shelter"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 
