@@ -88,7 +88,7 @@
             android:layout_marginTop="24dp">
 
             <ImageView
-                android:paddingTop="4dp"
+                android:paddingTop="2dp"
                 android:paddingBottom="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
                 android:src="@mipmap/ic_accessibility_black_24dp"
                 android:tint="@color/colorPrimaryDark"
                 android:layout_alignStart="@+id/petColor"
-                android:paddingTop="12dp"
+                android:paddingTop="10dp"
                 android:id="@+id/imageGender"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentTop="true" />
@@ -117,7 +117,7 @@
                 android:src="@mipmap/ic_aspect_ratio_black_24dp"
                 android:tint="@color/colorPrimaryDark"
                 android:layout_alignStart="@+id/petColor"
-                android:paddingTop="14dp"
+                android:paddingTop="10dp"
                 android:id="@+id/imageSize"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentTop="true" />
@@ -129,7 +129,7 @@
                 android:src="@mipmap/ic_check_circle_black_24dp"
                 android:tint="@color/colorPrimaryDark"
                 android:layout_alignStart="@+id/petColor"
-                android:paddingTop="14dp"
+                android:paddingTop="10dp"
                 android:id="@+id/imageDeclawed"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentTop="true" />
@@ -151,7 +151,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_date_range_black_24dp"
-                android:paddingTop="14dp"
+                android:paddingTop="8dp"
                 android:tint="@color/colorPrimaryDark"
                 android:layout_alignStart="@+id/petColor"
                 android:id="@+id/imageIntakeDate"
@@ -166,7 +166,7 @@
                 android:tint="@color/colorPrimaryDark"
                 android:layout_alignStart="@+id/petColor"
                 android:id="@+id/imageSpecial"
-                android:paddingTop="12dp"
+                android:paddingTop="10dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentTop="true" />
         </LinearLayout>

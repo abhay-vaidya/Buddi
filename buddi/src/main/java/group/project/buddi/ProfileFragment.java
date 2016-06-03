@@ -27,9 +27,9 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile,
                 container, false);
 
-        userName = (TextView) view.findViewById(R.id.userName);
+       // userName = (TextView) view.findViewById(R.id.userName);
 
-        loadJSON();
+        //loadJSON();
 
         return view;
     }
