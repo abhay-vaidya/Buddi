@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="group.project.buddi.DetailsActivity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/imageView"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:src="@drawable/dog"
+        app:civ_border_width="4dp"
+        app:civ_border_color="@color/white"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Jerry"
+        android:textStyle="bold"
+        android:textColor="#FFF"
+        android:id="@+id/petName"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#FFF"
+        android:text="7 weeks old"
+        android:textSize="18sp"
+        android:id="@+id/petAge"
+        android:layout_below="@+id/petName"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#FFF"
+        android:text="Golden Retriever"
+        android:textSize="12sp"
+        android:id="@+id/petBreed"
+        android:layout_below="@+id/petAge"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#FFF"
+        android:text="This is a very nice and fun dog."
+        android:textSize="12sp"
+        android:id="@+id/petDescription"
+        android:layout_below="@+id/petBreed"
+        android:layout_centerHorizontal="true"/>
+
+
+    <LinearLayout
+        android:layout_marginTop="320dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#FFF"
+            android:text="Hazel"
+            android:textSize="18sp"
+            android:padding="8dp"
+            android:id="@+id/petColour"
+            android:layout_below="@+id/petDescription" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#FFF"
+            android:text="Male"
+            android:textSize="18sp"
+            android:padding="8dp"
+            android:id="@+id/petGender"
+            android:layout_below="@+id/petColour" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#FFF"
+            android:text="Large"
+            android:padding="8dp"
+            android:textSize="18sp"
+            android:id="@+id/petSize"
+            android:layout_below="@+id/petGender" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#FFF"
+            android:text="Declawed?"
+            android:padding="8dp"
+            android:textSize="18sp"
+            android:id="@+id/petDeclaw"
+            android:layout_below="@+id/petSize" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#FFF"
+            android:text="Neutered/Spayed?"
+            android:padding="8dp"
+            android:textSize="18sp"
+            android:id="@+id/petNeut"
+            android:layout_below="@+id/petDeclaw" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#FFF"
+            android:text="05/05/2015"
+            android:textSize="18sp"
+            android:padding="8dp"
+            android:id="@+id/petIntakeDate"
+            android:layout_below="@+id/petNeut" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#FFF"
+            android:text="Needs to be with his sister"
+            android:textSize="18sp"
+            android:padding="8dp"
+            android:id="@+id/petSpecialNeeds"
+            android:layout_below="@+id/petIntakeDate" />
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>

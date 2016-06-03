@@ -1,9 +1,12 @@
 package group.project.buddi;
 
+import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,10 +24,13 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.RecyclerViewHo
         this.petData = petData;
     }
 
+
+
     @Override
     public int getItemCount() {
         return petData.size();
     }
+
 
 
     @Override
@@ -55,6 +61,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.RecyclerViewHo
         protected TextView vAge;
         protected TextView vBreed;
         protected ImageView vImage;
+        protected ImageButton vButton;
 
         public RecyclerViewHolder(View v) {
             super(v);
@@ -62,6 +69,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.RecyclerViewHo
             vAge = (TextView) v.findViewById(R.id.petAge);
             vBreed= (TextView) v.findViewById(R.id.petBreed);
             vImage = (ImageView) v.findViewById(R.id.imageView);
+            vButton = (ImageButton) v.findViewById(R.id.detailsButton);
         }
     }
 

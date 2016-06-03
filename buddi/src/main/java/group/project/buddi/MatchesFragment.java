@@ -1,6 +1,7 @@
 package group.project.buddi;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.gson.JsonArray;
@@ -33,6 +35,7 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private DataAdapter mAdapter;
     private RecyclerView mRecyclerPets;
     private SwipeRefreshLayout mSwipeRefreshLayout;
+    private ImageButton mDetailsButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +49,8 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
         mRecyclerPets = (RecyclerView) rootView.findViewById(R.id.petList);
         mRecyclerPets.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
 
         loadJSON();
 
@@ -69,6 +74,7 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
             }
         });
         swipeToDismissTouchHelper.attachToRecyclerView(mRecyclerPets);
+
 
         return rootView;
     }
@@ -94,8 +100,8 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
                             Data ci = new Data();
                             ci.name = dog.get("name").getAsString();
-                            ci.age = "6 weeks old";
-                            ci.breed = "Golden Retriever";
+                            ci.age = dog.get("age").getAsString() + " years old";
+                            ci.breed = dog.get("breed").getAsString();
                             Resources res = getResources();
                             Drawable drawable = res.getDrawable(R.drawable.dog);
                             ci.image = drawable;
