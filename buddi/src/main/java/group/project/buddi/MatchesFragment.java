@@ -35,7 +35,6 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private DataAdapter mAdapter;
     private RecyclerView mRecyclerPets;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private ImageButton mDetailsButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

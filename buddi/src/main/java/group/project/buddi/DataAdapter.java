@@ -1,7 +1,9 @@
 package group.project.buddi;
 
 import android.content.Intent;
+import android.media.Image;
 import android.provider.ContactsContract;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,6 +85,25 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.RecyclerViewHo
             petData = list;
         }
         notifyDataSetChanged();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder{
+
+        ImageButton detailsButton;
+
+        public ViewHolder(View itemView) {
+
+            super(itemView);
+            detailsButton = (ImageButton) itemView.findViewById(R.id.detailsButton);
+
+            detailsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    Toast.makeText(v.getContext(), "SUCCESS", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
 }
