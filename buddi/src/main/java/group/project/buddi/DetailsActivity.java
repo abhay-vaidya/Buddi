@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -49,25 +50,27 @@ public class DetailsActivity extends AppCompatActivity {
         imageDeclawed = (ImageView)findViewById(R.id.imageDeclawed);
 
 
-        int id = ((Bundle)getIntent().getExtras()).getInt("id");
-        loadJSON(id);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            int id = extras.getInt("pet_id");
+            Toast.makeText(this, String.valueOf(id), Toast.LENGTH_SHORT).show();
+            loadJSON(id);
+        }
 
     }
-
 
     private void loadJSON(int id) {
         Context context = DetailsActivity.this;
         SharedPreferences sharedPref = context.getSharedPreferences(
                 getString(R.string.oauth), Context.MODE_PRIVATE);
 
-        Ion.with(context)
-                .load("http://ec2-52-91-255-81.compute-1.amazonaws.com/api/v1/dogs/" + id + "?access_token=" + sharedPref.getString("auth_token", "broke"))
-                .asJsonArray()
-                .setCallback(new FutureCallback<JsonArray>() {
-                    @Override
-                    public void onCompleted(Exception e, JsonArray result) {
 
-                        JsonObject dog = result.getAsJsonObject();
+        Ion.with(context)
+                .load("http://ec2-52-91-255-81.compute-1.amazonaws.com/api/v1/dogs/" + String.valueOf(id) + "?access_token=" + sharedPref.getString("auth_token", "broke"))
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject dog) {
 
                         petName.setText( dog.get("name").getAsString() + "\n(" + dog.get("reference_num").getAsString() + ")");
                         petAge.setText( dog.get("age").getAsString() );
@@ -88,7 +91,6 @@ public class DetailsActivity extends AppCompatActivity {
                         } else {
                             imageDeclawed.setImageResource(R.mipmap.ic_cancel_black_24dp);
                         }
-
 
                     }
                 });

@@ -54,6 +54,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.RecyclerViewHo
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailsActivity.class);
+                Toast.makeText(context, String.valueOf(id), Toast.LENGTH_SHORT).show();
                 intent.putExtra("pet_id", id);
                 context.startActivity(intent);
             }
