@@ -25,6 +25,8 @@ public class AttributeAdapter extends RecyclerView.Adapter<AttributeAdapter.Recy
         return attributes.size();
     }
 
+    public List<String> getAttributes() { return attributes; }
+
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder recyclerViewHolder, int i) {
