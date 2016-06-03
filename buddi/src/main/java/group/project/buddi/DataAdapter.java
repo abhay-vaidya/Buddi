@@ -23,6 +23,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.RecyclerViewHo
 
     private static List<Data> petData;
     private Context context;
+    private int id;
 
     public DataAdapter(Context context, List<Data> petData) {
 
@@ -47,10 +48,13 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.RecyclerViewHo
         recyclerViewHolder.vBreed.setText(d.breed);
         recyclerViewHolder.vImage.setImageDrawable(d.image);
 
+        id = d.id;
+
         recyclerViewHolder.vButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailsActivity.class);
+                intent.putExtra("pet_id", id);
                 context.startActivity(intent);
             }
         });

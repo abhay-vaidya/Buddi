@@ -98,6 +98,7 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
 //                            Toast.makeText(getActivity(), dog.get("name").getAsString(), Toast.LENGTH_SHORT).show();
 
                             Data ci = new Data();
+                            ci.id = dog.get("id").getAsInt();
                             ci.name = dog.get("name").getAsString();
                             ci.age = dog.get("age").getAsString() + " years old";
                             ci.breed = dog.get("breed").getAsString();
