@@ -73,7 +73,7 @@ public class DetailsActivity extends AppCompatActivity {
                     public void onCompleted(Exception e, JsonObject dog) {
 
                         petName.setText( dog.get("name").getAsString() + "\n(" + dog.get("reference_num").getAsString() + ")");
-                        petAge.setText( dog.get("age").getAsString() );
+                        petAge.setText( dog.get("age").getAsString() + "years old");
                         petBreed.setText( dog.get("breed").getAsString() );
                         petDescription.setText( dog.get("description").getAsString() );
                         petColor.setText( dog.get("color").getAsString() );
