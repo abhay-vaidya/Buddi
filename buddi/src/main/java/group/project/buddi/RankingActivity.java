@@ -89,8 +89,6 @@ public class RankingActivity extends AppCompatActivity {
                 editor.putString("code", code);
                 editor.commit();
 
-                // Display for testing
-                Toast.makeText(RankingActivity.this, code, Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(RankingActivity.this, HomeActivity.class);
                 startActivity(intent);

@@ -42,9 +42,9 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-       // userName = (TextView) view.findViewById(R.id.userName);
+       userName = (TextView) view.findViewById(R.id.username);
 
-        //loadJSON();
+       // loadJSON();
 
         return view;
     }

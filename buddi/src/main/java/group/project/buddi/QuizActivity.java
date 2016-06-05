@@ -36,6 +36,15 @@ public class QuizActivity extends AppCompatActivity {
         nextButton = (Button)findViewById(R.id.nextButton);
         nextButton.setElevation(0);
 
+        SharedPreferences sharedPref = this.getSharedPreferences(
+                getString(R.string.oauth), Context.MODE_PRIVATE);
+
+        mSeekNoise.setProgress(Integer.valueOf(sharedPref.getString("noiselvl", "0")));
+        mSeekActive.setProgress(Integer.valueOf(sharedPref.getString("activitylvl", "0")));
+        mSeekFriendliness.setProgress(Integer.valueOf(sharedPref.getString("friendlvl", "0")));
+        mSeekTraining.setProgress(Integer.valueOf(sharedPref.getString("traininglvl", "0")));
+        mSeekHealth.setProgress(Integer.valueOf(sharedPref.getString("healthlvl", "0")));
+
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +60,13 @@ public class QuizActivity extends AppCompatActivity {
                         getString(R.string.oauth), Context.MODE_PRIVATE);
 
                 SharedPreferences.Editor editor = sharedPref.edit();
+
+                editor.putString("noiselvl", noiseLevel);
+                editor.putString("activitylvl", activityLevel);
+                editor.putString("friendlvl", friendLevel);
+                editor.putString("traininglvl", trainingLevel);
+                editor.putString("healthlvl", healthLevel);
+
                 editor.putString("score", noiseLevel + activityLevel + friendLevel + trainingLevel + healthLevel );
                 editor.commit();
 
@@ -64,9 +80,11 @@ public class QuizActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         getSupportActionBar().setElevation(0);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
+
         seekBar();
     }
 }
