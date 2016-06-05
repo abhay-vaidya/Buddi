@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +26,8 @@ import java.security.Permission;
 import java.util.jar.Manifest;
 
 public class DetailsActivity extends AppCompatActivity {
+
+    private static final int PERMISSION_REQUEST_CODE = 1;
 
     TextView petName;
     TextView petAge;
@@ -79,11 +82,11 @@ public class DetailsActivity extends AppCompatActivity {
                     if (hasPermission == PackageManager.PERMISSION_GRANTED) {
                         context.startActivity(intent);
                     } else {
-                        Toast.makeText(DetailsActivity.this, "Permission to access phone not enabled.", Toast.LENGTH_SHORT).show();
+                        requestPermission();
                     }
 
                 } else {
-                    Toast.makeText(DetailsActivity.this, "Phone number invalid.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Phone number is invalid.",Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -94,7 +97,6 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // Creates an Intent that will load a map of San Francisco
                 Uri gmmIntentUri = Uri.parse("geo:" + latitude + "," + longitude + "?q=" + locationName);
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
@@ -109,6 +111,10 @@ public class DetailsActivity extends AppCompatActivity {
             loadJSON(id);
         }
 
+    }
+
+    private void requestPermission(){
+        ActivityCompat.requestPermissions(this,new String[]{android.Manifest.permission.CALL_PHONE},PERMISSION_REQUEST_CODE);
     }
 
     private void loadJSON(int id) {

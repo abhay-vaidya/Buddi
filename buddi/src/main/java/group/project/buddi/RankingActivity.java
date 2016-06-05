@@ -89,7 +89,6 @@ public class RankingActivity extends AppCompatActivity {
                 editor.putString("code", code);
                 editor.commit();
 
-
                 Intent intent = new Intent(RankingActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();
