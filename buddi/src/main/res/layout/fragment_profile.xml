@@ -59,7 +59,7 @@
             android:text="Change Preferences"
             android:textColor="@color/white"
             android:backgroundTint="@color/colorPrimary"
-            android:id="@+id/button"
+            android:id="@+id/changePrefButton"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
 
