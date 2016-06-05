@@ -53,6 +53,8 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+
         getSupportActionBar().setElevation(0);
 
         petName = (TextView)findViewById(R.id.petName);

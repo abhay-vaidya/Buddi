@@ -1,10 +1,8 @@
 package group.project.buddi;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
-import android.provider.ContactsContract;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -58,6 +55,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.RecyclerViewHo
                 Intent intent = new Intent(v.getContext(), DetailsActivity.class);
                 intent.putExtra("pet_id", d.id);
                 context.startActivity(intent);
+                ((Activity) context).overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
 
             }
         });
