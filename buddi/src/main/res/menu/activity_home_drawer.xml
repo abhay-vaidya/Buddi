@@ -7,21 +7,19 @@
             android:icon="@mipmap/ic_pets_black_24dp"
             android:checked="true"
             android:title="Your Matches" />
-        <item
-            android:id="@+id/nav_profile"
-            android:icon="@mipmap/ic_face_black_24dp"
-            android:title="Profile" />
+
 
     </group>
 
 
-    <item android:title="Contact">
+    <item android:title="You">
         <menu>
             <group android:checkableBehavior="single">
+
                 <item
-                    android:id="@+id/nav_send"
-                    android:icon="@mipmap/ic_send_black_24dp"
-                    android:title="Closest Shelter" />
+                    android:id="@+id/nav_profile"
+                    android:icon="@mipmap/ic_face_black_24dp"
+                    android:title="Profile" />
 
             </group>
         </menu>

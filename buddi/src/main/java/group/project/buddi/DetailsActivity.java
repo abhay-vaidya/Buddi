@@ -50,7 +50,7 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        getSupportActionBar().setElevation(10);
+        getSupportActionBar().setElevation(0);
 
         petName = (TextView)findViewById(R.id.petName);
         petAge = (TextView)findViewById(R.id.petAge);
