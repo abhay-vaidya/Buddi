@@ -25,9 +25,14 @@ import com.koushikdutta.ion.Ion;
 import java.security.Permission;
 import java.util.jar.Manifest;
 
+import group.project.buddi.model.DatabaseAdapter;
+import group.project.buddi.model.Dog;
+
 public class DetailsActivity extends AppCompatActivity {
 
     private static final int PERMISSION_REQUEST_CODE = 1;
+
+    private DatabaseAdapter dbAdapter;
 
     TextView petName;
     TextView petAge;
@@ -108,13 +113,43 @@ public class DetailsActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             int id = extras.getInt("pet_id");
-            loadJSON(id);
+            loadFromDB(id);
+        } else {
+            Context context = DetailsActivity.this;
+            Intent intent = new Intent(context, HomeActivity.class);
+            context.startActivity(intent);
+            Toast.makeText(context, "Invalid or missing dog ID.", Toast.LENGTH_SHORT).show();
         }
 
     }
 
     private void requestPermission(){
         ActivityCompat.requestPermissions(this,new String[]{android.Manifest.permission.CALL_PHONE},PERMISSION_REQUEST_CODE);
+    }
+
+    private void loadFromDB(int id) {
+
+        // get Instance  of Database Adapter
+        dbAdapter = new DatabaseAdapter(DetailsActivity.this);
+        try {
+            dbAdapter.open();
+        } catch (Exception e) {
+            Toast.makeText(DetailsActivity.this, "Error opening database.", Toast.LENGTH_SHORT).show();
+        }
+
+        // Load all dogs from database
+        Dog dog = dbAdapter.getDog(id);
+
+        if (dog != null) {
+
+            petName.setText(dog.getName() + "\n(" + dog.getReferenceNum() + ")");
+            petAge.setText(dog.getAge() + " years old");
+            petBreed.setText(dog.getBreed());
+
+        } else {
+            loadJSON(id);
+        }
+
     }
 
     private void loadJSON(int id) {
@@ -130,32 +165,47 @@ public class DetailsActivity extends AppCompatActivity {
                     @Override
                     public void onCompleted(Exception e, JsonObject dog) {
 
-                        phoneNumber = dog.get("location").getAsJsonObject().get("phone_num").getAsString();
-                        locationName = dog.get("location").getAsJsonObject().get("name").getAsString();
-                        latitude = dog.get("location").getAsJsonObject().get("lat").getAsString();
-                        longitude = dog.get("location").getAsJsonObject().get("long").getAsString();
+                        try {
+                            phoneNumber = dog.get("location").getAsJsonObject().get("phone_num").getAsString();
+                            locationName = dog.get("location").getAsJsonObject().get("name").getAsString();
+                            latitude = dog.get("location").getAsJsonObject().get("lat").getAsString();
+                            longitude = dog.get("location").getAsJsonObject().get("long").getAsString();
 
-                        petName.setText( dog.get("name").getAsString() + "\n(" + dog.get("reference_num").getAsString() + ")");
-                        petAge.setText( dog.get("age").getAsString() + " years old");
-                        petBreed.setText( dog.get("breed").getAsString() );
-                        petDescription.setText( dog.get("description").getAsString() );
-                        petColor.setText( dog.get("color").getAsString() );
-                        petGender.setText( dog.get("gender").getAsString() );
-                        petSize.setText( dog.get("size").getAsString() );
-                        petIntakeDate.setText( dog.get("intake_date").getAsString() );
-                        petSpecialNeeds.setText( dog.get("special_needs").getAsString() );
-                        if ( dog.get("neutered").getAsBoolean() ) {
-                            imageNeutered.setImageResource(R.mipmap.ic_check_circle_black_24dp);
-                        } else {
-                            imageNeutered.setImageResource(R.mipmap.ic_cancel_black_24dp);
-                        }
-                        if ( dog.get("declawed").getAsBoolean() ) {
-                            imageDeclawed.setImageResource(R.mipmap.ic_check_circle_black_24dp);
-                        } else {
-                            imageDeclawed.setImageResource(R.mipmap.ic_cancel_black_24dp);
+                            petName.setText(dog.get("name").getAsString() + "\n(" + dog.get("reference_num").getAsString() + ")");
+                            petAge.setText(dog.get("age").getAsString() + " years old");
+                            petBreed.setText(dog.get("breed").getAsString());
+                            petDescription.setText(dog.get("description").getAsString());
+                            petColor.setText(dog.get("color").getAsString());
+                            petGender.setText(dog.get("gender").getAsString());
+                            petSize.setText(dog.get("size").getAsString());
+                            petIntakeDate.setText(dog.get("intake_date").getAsString());
+                            petSpecialNeeds.setText(dog.get("special_needs").getAsString());
+                            if (dog.get("neutered").getAsBoolean()) {
+                                imageNeutered.setImageResource(R.mipmap.ic_check_circle_black_24dp);
+                            } else {
+                                imageNeutered.setImageResource(R.mipmap.ic_cancel_black_24dp);
+                            }
+                            if (dog.get("declawed").getAsBoolean()) {
+                                imageDeclawed.setImageResource(R.mipmap.ic_check_circle_black_24dp);
+                            } else {
+                                imageDeclawed.setImageResource(R.mipmap.ic_cancel_black_24dp);
+                            }
+
+                        } catch (Exception x) {
+                            Context context = DetailsActivity.this;
+                            Intent intent = new Intent(context, HomeActivity.class);
+                            context.startActivity(intent);
+                            Toast.makeText(DetailsActivity.this, "Failed to load details.", Toast.LENGTH_SHORT).show();
                         }
 
                     }
                 });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        // Close database
+        dbAdapter.close();
     }
 }

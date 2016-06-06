@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import group.project.buddi.model.DatabaseAdapter;
+
 public class HomeActivity extends AppCompatActivity {
 
     private AppBarLayout mAppBarLayout;
@@ -21,6 +23,7 @@ public class HomeActivity extends AppCompatActivity {
     private ActionBarDrawerToggle drawerToggle;
 
     private MatchesFragment matchesFragment = new MatchesFragment();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,10 +1,13 @@
 package group.project.buddi.model;
 
+import android.graphics.drawable.Drawable;
+
 /**
  * Created by Ahmed on 2016-06-04.
  */
 public class Dog {
 
+    private int m_id;
     private String m_reference_num;
     private String m_name;
     private int m_age;
@@ -19,7 +22,6 @@ public class Dog {
     private String m_intakeDate;
     private DogFactors m_factors;
     private String m_desc;
-
 
 
     public Dog() {
@@ -66,7 +68,11 @@ public class Dog {
     }
 
     // Getters and Setters
-    public String getReference_num() {
+    public int getID() { return m_id; }
+
+    public void setID(int id) { m_id = id; }
+
+    public String getReferenceNum() {
         return m_reference_num;
     }
 
@@ -169,6 +175,10 @@ public class Dog {
     public void setDesc(String desc) {
         m_desc = desc;
     }
+
+    public String getImageURL() { return m_imageURL; }
+
+    public void setImageURL(String image) { m_imageURL = image; }
 
     public String toString() {
         return "Dog [reference_num=" + m_reference_num + " name=" + m_name + " breed=" + m_breed + " age=" + m_age + "]";

@@ -96,8 +96,7 @@ public class LoginActivity extends AppCompatActivity {
         editor.commit();
 
 
-        // TODO: Implement your own authentication logic here.
-
+        // Authenticate via API
         Ion.with(context)
                 .load("http://ec2-52-91-255-81.compute-1.amazonaws.com/oauth/access_token")
                 .setBodyParameter("grant_type", sharedPref.getString("grant_type", null))
@@ -123,12 +122,9 @@ public class LoginActivity extends AppCompatActivity {
                             editor.commit();
                             canProceed = true;
 
-                           // Toast.makeText(LoginActivity.this, sharedPref.getString("auth_token", "broke"), Toast.LENGTH_SHORT).show();
-                        }catch (Exception x){
+                        } catch (Exception x){
 
                         }
-
-
 
                     }
                 });
@@ -153,7 +149,6 @@ public class LoginActivity extends AppCompatActivity {
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
 
-                // TODO: Implement successful signup logic here
                 // By default we just finish the Activity and log them in automatically
                 this.finish();
             }

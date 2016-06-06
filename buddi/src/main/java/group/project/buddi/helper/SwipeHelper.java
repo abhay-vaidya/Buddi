@@ -2,9 +2,8 @@ package group.project.buddi.helper;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.widget.Toast;
 
-import group.project.buddi.DataAdapter;
+import group.project.buddi.DogRecylerAdapter;
 
 /**
  * Created by Abhay on 15/05/2016.
@@ -12,14 +11,14 @@ import group.project.buddi.DataAdapter;
 public class SwipeHelper extends ItemTouchHelper.SimpleCallback{
 
 
-    DataAdapter adapter;
+    DogRecylerAdapter adapter;
 
 
     public SwipeHelper(int dragDirs, int swipeDirs) {
         super(dragDirs, swipeDirs);
     }
 
-    public SwipeHelper(DataAdapter adapter) {
+    public SwipeHelper(DogRecylerAdapter adapter) {
         super(ItemTouchHelper.ACTION_STATE_IDLE, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT );
         this.adapter = adapter;
     }
