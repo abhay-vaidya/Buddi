@@ -1,5 +1,6 @@
 package group.project.buddi;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -62,6 +63,7 @@ public class DogRecylerAdapter extends RecyclerView.Adapter<DogRecylerAdapter.Re
                 Intent intent = new Intent(v.getContext(), DetailsActivity.class);
                 intent.putExtra("pet_id", d.getID());
                 m_context.startActivity(intent);
+                ((Activity) m_context).overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
 
             }
         });

@@ -39,6 +39,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), QuizActivity.class);
                 startActivity(i);
+                getActivity().finish();
             }
         });
 
