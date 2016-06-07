@@ -36,14 +36,21 @@ public class QuizActivity extends AppCompatActivity {
         nextButton = (Button)findViewById(R.id.nextButton);
         nextButton.setElevation(0);
 
+
+        // Load existing data if it exists
         SharedPreferences sharedPref = this.getSharedPreferences(
                 getString(R.string.oauth), Context.MODE_PRIVATE);
 
-        mSeekNoise.setProgress(Integer.valueOf(sharedPref.getString("noiselvl", "0")));
-        mSeekActive.setProgress(Integer.valueOf(sharedPref.getString("activitylvl", "0")));
-        mSeekFriendliness.setProgress(Integer.valueOf(sharedPref.getString("friendlvl", "0")));
-        mSeekTraining.setProgress(Integer.valueOf(sharedPref.getString("traininglvl", "0")));
-        mSeekHealth.setProgress(Integer.valueOf(sharedPref.getString("healthlvl", "0")));
+        String code = sharedPref.getString("code", "A0B0C0D0E0");
+
+        
+        mSeekNoise.setProgress(Integer.valueOf(code.substring(1,2)));
+        mSeekActive.setProgress(Integer.valueOf(code.substring(3,4)));
+        mSeekFriendliness.setProgress(Integer.valueOf(code.substring(5,6)));
+        mSeekTraining.setProgress(Integer.valueOf(code.substring(7,8)));
+        mSeekHealth.setProgress(Integer.valueOf(code.substring(9,10)));
+
+
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override

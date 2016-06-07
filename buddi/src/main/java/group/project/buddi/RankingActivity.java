@@ -38,11 +38,27 @@ public class RankingActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mData.add("Noise");
-        mData.add("Activity");
-        mData.add("Friendliness");
-        mData.add("Patience");
-        mData.add("Healthiness");
+        // Load existing data if it exists
+        SharedPreferences sharedPref = this.getSharedPreferences(
+                getString(R.string.oauth), Context.MODE_PRIVATE);
+
+        String code = sharedPref.getString("code", "A0B0C0D0E0");
+        List<String> categories = new ArrayList<String>();
+        categories.add("Noise");
+        categories.add("Activity");
+        categories.add("Friendliness");
+        categories.add("Patience");
+        categories.add("Healthiness");
+
+        for (int i=0; i<5; i++) {
+
+            char a = (char) (i + 65);
+            int rank = (int) (code.indexOf(a) / 2);
+            mData.add(categories.get(rank));
+
+        }
+
+
 
         mAdapter = new AttributeAdapter(mData);
         mRecyclerView.setAdapter(mAdapter);
@@ -57,11 +73,11 @@ public class RankingActivity extends AppCompatActivity {
 
                 List<String> attributes = mAdapter.getAttributes();
 
-                char noiseRank = (char)(attributes.indexOf( new String("Noise")) + 65);
-                char activityRank = (char)(attributes.indexOf( new String("Activity")) + 65);
-                char friendRank = (char)(attributes.indexOf( new String("Friendliness")) + 65);
-                char trainingRank = (char)(attributes.indexOf( new String("Patience")) + 65);
-                char healthRank = (char)(attributes.indexOf( new String("Healthiness")) + 65);
+                char noiseRank = (char)(attributes.indexOf("Noise") + 65);
+                char activityRank = (char)(attributes.indexOf("Activity") + 65);
+                char friendRank = (char)(attributes.indexOf("Friendliness") + 65);
+                char trainingRank = (char)(attributes.indexOf("Patience") + 65);
+                char healthRank = (char)(attributes.indexOf("Healthiness") + 65);
 
                 Context context = RankingActivity.this;
                 SharedPreferences sharedPref = context.getSharedPreferences(
