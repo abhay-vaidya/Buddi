@@ -95,6 +95,9 @@ public class DatabaseAdapter {
 
     public void clearDogs() {
 
+        String queryString = "DELETE FROM " + DogEntry.TABLE_NAME + ";";
+        db.execSQL(queryString);
+
     }
 
     public List<Dog> getAllDogs() {
@@ -130,7 +133,7 @@ public class DatabaseAdapter {
     public Dog getDog(int id) {
 
         Dog dog = new Dog();
-        String queryString = "SELECT * FROM " + DogEntry.TABLE_NAME + " WHERE dogID=" + String.valueOf(id) + " AND WHERE " + DogEntry.COLUMN_NAME_BLACKLIST + "=0;";;
+        String queryString = "SELECT * FROM " + DogEntry.TABLE_NAME + " WHERE dogID=" + String.valueOf(id) + ";";;
 
         Cursor cursor = db.rawQuery(queryString, null);
 

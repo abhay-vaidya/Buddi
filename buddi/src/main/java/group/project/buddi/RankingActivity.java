@@ -16,6 +16,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import group.project.buddi.model.DatabaseAdapter;
+
 public class RankingActivity extends AppCompatActivity {
 
     private List<String> mData = new ArrayList<String>();
@@ -104,6 +106,12 @@ public class RankingActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putString("code", code);
                 editor.commit();
+
+                // Clear database
+                DatabaseAdapter dbAdapter = new DatabaseAdapter(RankingActivity.this);
+                dbAdapter.open();
+                dbAdapter.clearDogs();
+                dbAdapter.close();
 
                 Intent intent = new Intent(RankingActivity.this, HomeActivity.class);
                 startActivity(intent);
