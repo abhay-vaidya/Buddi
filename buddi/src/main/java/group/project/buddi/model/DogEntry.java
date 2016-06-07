@@ -16,5 +16,11 @@ public abstract class DogEntry implements BaseColumns {
     public static final String COLUMN_NAME_AGE = "age";
     public static final String COLUMN_NAME_BREED = "breed";
     public static final String COLUMN_NAME_IMAGE = "image";
+    public static final String COLUMN_NAME_COLOR = "color";
+    public static final String COLUMN_NAME_GENDER = "gender";
+
+
+
+    public static final String COLUMN_NAME_BLACKLIST = "blacklist";
 
 }

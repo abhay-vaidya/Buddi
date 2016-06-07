@@ -139,14 +139,16 @@ public class DetailsActivity extends AppCompatActivity {
             Toast.makeText(DetailsActivity.this, "Error opening database.", Toast.LENGTH_SHORT).show();
         }
 
-        // Load all dogs from database
+        // Load dog from database
         Dog dog = dbAdapter.getDog(id);
 
-        if (dog != null) {
+        if (dog.getColor() != null) {
 
             petName.setText(dog.getName() + "\n(" + dog.getReferenceNum() + ")");
             petAge.setText(dog.getAge() + " years old");
             petBreed.setText(dog.getBreed());
+            petColor.setText(dog.getColor());
+            petGender.setText(dog.getGender());
 
         } else {
             loadJSON(id);

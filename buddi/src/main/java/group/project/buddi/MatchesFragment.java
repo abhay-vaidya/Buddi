@@ -24,6 +24,7 @@ import com.koushikdutta.ion.Ion;
 
 import group.project.buddi.model.DatabaseAdapter;
 import group.project.buddi.model.Dog;
+import group.project.buddi.model.DogEntry;
 
 
 public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
@@ -66,6 +67,20 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 // callback for swipe to dismiss, removing item from data and adapter
+
+                int id = mData.get(viewHolder.getAdapterPosition()).getID();
+//                Toast.makeText(getContext(), "Removed dog with id:" + id, Toast.LENGTH_SHORT).show();
+
+                dbAdapter = new DatabaseAdapter(m_context);
+                try {
+                    dbAdapter.open();
+                } catch (Exception e) {
+                    Toast.makeText(m_context, "Error opening database.", Toast.LENGTH_SHORT).show();
+                }
+
+                dbAdapter.updateDog(DogEntry.COLUMN_NAME_BLACKLIST, id, true);
+
+
                 mData.remove(viewHolder.getAdapterPosition());
                 mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
             }

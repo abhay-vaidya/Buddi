@@ -52,6 +52,8 @@ public class DatabaseAdapter {
         int age = dog.getAge();
         String breed = dog.getBreed();
         String imageURL = dog.getImageURL();
+        String color = dog.getColor();
+        String gender = dog.getGender();
 
         ContentValues cVal = new ContentValues();
         cVal.put(DogEntry.COLUMN_NAME_DOG_ID, id);
@@ -60,9 +62,34 @@ public class DatabaseAdapter {
         cVal.put(DogEntry.COLUMN_NAME_AGE, age);
         cVal.put(DogEntry.COLUMN_NAME_BREED, breed);
         cVal.put(DogEntry.COLUMN_NAME_IMAGE, imageURL);
+        cVal.put(DogEntry.COLUMN_NAME_COLOR, color);
+        cVal.put(DogEntry.COLUMN_NAME_GENDER, gender);
+        cVal.put(DogEntry.COLUMN_NAME_BLACKLIST, 0);
 
         // Insert user values in database
         db.insert(DogEntry.TABLE_NAME, null, cVal);
+
+    }
+
+    public void updateDog(String column, String value) {
+
+    }
+
+    public void updateDog(String column, int value) {
+
+    }
+
+    public void updateDog(String column, int id, boolean value) {
+
+        if (value) {
+
+            String queryString = "UPDATE " + DogEntry.TABLE_NAME + " SET " + column + "=1 WHERE dogID=" + id + ";";
+            db.execSQL(queryString);
+
+        } else {
+            String queryString = "UPDATE " + DogEntry.TABLE_NAME + " SET " + column + "=0 WHERE dogID=" + id + ";";
+            db.execSQL(queryString);
+        }
 
     }
 
@@ -73,7 +100,7 @@ public class DatabaseAdapter {
     public List<Dog> getAllDogs() {
 
         List<Dog> dogList = new ArrayList<Dog>();
-        String queryString = "SELECT * FROM " + DogEntry.TABLE_NAME;
+        String queryString = "SELECT * FROM " + DogEntry.TABLE_NAME + " WHERE " + DogEntry.COLUMN_NAME_BLACKLIST + "=0;";
 
         Cursor cursor = db.rawQuery(queryString, null);
 
@@ -86,6 +113,8 @@ public class DatabaseAdapter {
                 dog.setAge(cursor.getInt( cursor.getColumnIndex(DogEntry.COLUMN_NAME_AGE) ));
                 dog.setBreed(cursor.getString( cursor.getColumnIndex(DogEntry.COLUMN_NAME_BREED) ));
                 dog.setImageURL(cursor.getString( cursor.getColumnIndex(DogEntry.COLUMN_NAME_IMAGE) ));
+                dog.setColor(cursor.getString( cursor.getColumnIndex(DogEntry.COLUMN_NAME_COLOR) ));
+                dog.setGender(cursor.getString( cursor.getColumnIndex(DogEntry.COLUMN_NAME_GENDER )));
 
                 // Adding dog to list
                 dogList.add(dog);
@@ -101,7 +130,7 @@ public class DatabaseAdapter {
     public Dog getDog(int id) {
 
         Dog dog = new Dog();
-        String queryString = "SELECT * FROM " + DogEntry.TABLE_NAME + " WHERE dogID=" + String.valueOf(id);
+        String queryString = "SELECT * FROM " + DogEntry.TABLE_NAME + " WHERE dogID=" + String.valueOf(id) + " AND WHERE " + DogEntry.COLUMN_NAME_BLACKLIST + "=0;";;
 
         Cursor cursor = db.rawQuery(queryString, null);
 
@@ -112,6 +141,8 @@ public class DatabaseAdapter {
             dog.setAge(cursor.getInt( cursor.getColumnIndex(DogEntry.COLUMN_NAME_AGE) ));
             dog.setBreed(cursor.getString( cursor.getColumnIndex(DogEntry.COLUMN_NAME_BREED) ));
             dog.setImageURL(cursor.getString( cursor.getColumnIndex(DogEntry.COLUMN_NAME_IMAGE) ));
+            dog.setColor(cursor.getString( cursor.getColumnIndex(DogEntry.COLUMN_NAME_COLOR )));
+            dog.setGender(cursor.getString( cursor.getColumnIndex(DogEntry.COLUMN_NAME_GENDER )));
         }
 
         return dog;

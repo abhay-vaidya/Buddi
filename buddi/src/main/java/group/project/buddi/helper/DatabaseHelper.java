@@ -18,6 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TEXT_TYPE = " TEXT";
     private static final String INT_TYPE = " INTEGER";
+    private static final String BOOL_TYPE = " BOOLEAN";
     private static final String UNIQUE = " UNIQUE";
     private static final String COMMA_SEP = ",";
     private static final String CREATE_DOGS =
@@ -28,7 +29,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     DogEntry.COLUMN_NAME_NAME + TEXT_TYPE + COMMA_SEP +
                     DogEntry.COLUMN_NAME_AGE + INT_TYPE + COMMA_SEP +
                     DogEntry.COLUMN_NAME_BREED + TEXT_TYPE + COMMA_SEP +
-                    DogEntry.COLUMN_NAME_IMAGE + TEXT_TYPE +
+                    DogEntry.COLUMN_NAME_IMAGE + TEXT_TYPE + COMMA_SEP +
+                    DogEntry.COLUMN_NAME_COLOR + TEXT_TYPE + COMMA_SEP +
+                    DogEntry.COLUMN_NAME_GENDER + TEXT_TYPE + COMMA_SEP +
+                    DogEntry.COLUMN_NAME_BLACKLIST + BOOL_TYPE +
                     ");";
     private static final String DELETE_TABLE =
             "DROP TABLE IF EXISTS " + DogEntry.TABLE_NAME;

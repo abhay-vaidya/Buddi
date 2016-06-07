@@ -13,7 +13,7 @@ public class Dog {
     private int m_age;
     private String m_imageURL;
     private Size m_size;
-    private Gender m_gender;
+    private String m_gender;
     private String m_breed;
     private String m_color;
     private boolean m_declawed;
@@ -36,7 +36,7 @@ public class Dog {
         m_imageURL = image;
     }
 
-    public Dog(String ref, String name, int age, Size size, Gender gender, String breed, String color, boolean declawed, boolean neutered, Location location, String intakeDate, DogFactors factors, String desc) {
+    public Dog(String ref, String name, int age, Size size, String gender, String breed, String color, boolean declawed, boolean neutered, Location location, String intakeDate, DogFactors factors, String desc) {
         m_reference_num = ref;
         m_name = name;
         m_age = age;
@@ -52,7 +52,7 @@ public class Dog {
         m_desc = desc;
     }
 
-    public Dog(String ref, String name, Size size, Gender gender, String breed, String color, boolean declawed, boolean neutered, Location location, String intakeDate, DogFactors factors, String desc) {
+    public Dog(String ref, String name, Size size, String gender, String breed, String color, boolean declawed, boolean neutered, Location location, String intakeDate, DogFactors factors, String desc) {
         m_reference_num = ref;
         m_name = name;
         m_size = size;
@@ -104,11 +104,11 @@ public class Dog {
         m_size = size;
     }
 
-    public Gender getGender() {
+    public String getGender() {
         return m_gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         m_gender = gender;
     }
 
