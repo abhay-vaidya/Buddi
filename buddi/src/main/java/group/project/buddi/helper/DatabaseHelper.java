@@ -27,9 +27,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     DogEntry.COLUMN_NAME_REF + TEXT_TYPE + UNIQUE + COMMA_SEP +
                     DogEntry.COLUMN_NAME_NAME + TEXT_TYPE + COMMA_SEP +
                     DogEntry.COLUMN_NAME_AGE + INT_TYPE + COMMA_SEP +
+                    DogEntry.COLUMN_NAME_BREED + TEXT_TYPE + COMMA_SEP +
                     DogEntry.COLUMN_NAME_IMAGE + TEXT_TYPE +
                     ");";
-    private static final String DELETE_DOGS =
+    private static final String DELETE_TABLE =
             "DROP TABLE IF EXISTS " + DogEntry.TABLE_NAME;
 
 
@@ -48,7 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        db.execSQL(DELETE_DOGS);
+        db.execSQL(DELETE_TABLE);
         onCreate(db);
     }
 

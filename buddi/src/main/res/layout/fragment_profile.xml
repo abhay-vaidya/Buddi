@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="John Doe"
+        android:text="Your Name"
         android:id="@+id/name"
         android:layout_gravity="center_horizontal" />
 
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="john-doe"
+            android:text="user-name"
             android:id="@+id/username"
             android:layout_gravity="center_horizontal" />
 
@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="johndoe@gmail.com"
+        android:text="example@example.com"
         android:id="@+id/emailAddress"
         android:layout_gravity="center_horizontal" />
 

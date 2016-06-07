@@ -50,6 +50,7 @@ public class DatabaseAdapter {
         String ref = dog.getReferenceNum();
         String name = dog.getName();
         int age = dog.getAge();
+        String breed = dog.getBreed();
         String imageURL = dog.getImageURL();
 
         ContentValues cVal = new ContentValues();
@@ -57,10 +58,15 @@ public class DatabaseAdapter {
         cVal.put(DogEntry.COLUMN_NAME_REF, ref);
         cVal.put(DogEntry.COLUMN_NAME_NAME, name);
         cVal.put(DogEntry.COLUMN_NAME_AGE, age);
+        cVal.put(DogEntry.COLUMN_NAME_BREED, breed);
         cVal.put(DogEntry.COLUMN_NAME_IMAGE, imageURL);
 
         // Insert user values in database
         db.insert(DogEntry.TABLE_NAME, null, cVal);
+
+    }
+
+    public void clearDogs() {
 
     }
 
@@ -78,6 +84,7 @@ public class DatabaseAdapter {
                 dog.setReferenceNum(cursor.getString( cursor.getColumnIndex(DogEntry.COLUMN_NAME_REF) ));
                 dog.setName(cursor.getString( cursor.getColumnIndex(DogEntry.COLUMN_NAME_NAME) ));
                 dog.setAge(cursor.getInt( cursor.getColumnIndex(DogEntry.COLUMN_NAME_AGE) ));
+                dog.setBreed(cursor.getString( cursor.getColumnIndex(DogEntry.COLUMN_NAME_BREED) ));
                 dog.setImageURL(cursor.getString( cursor.getColumnIndex(DogEntry.COLUMN_NAME_IMAGE) ));
 
                 // Adding dog to list
@@ -103,6 +110,7 @@ public class DatabaseAdapter {
             dog.setReferenceNum(cursor.getString( cursor.getColumnIndex(DogEntry.COLUMN_NAME_REF) ));
             dog.setName(cursor.getString( cursor.getColumnIndex(DogEntry.COLUMN_NAME_NAME) ));
             dog.setAge(cursor.getInt( cursor.getColumnIndex(DogEntry.COLUMN_NAME_AGE) ));
+            dog.setBreed(cursor.getString( cursor.getColumnIndex(DogEntry.COLUMN_NAME_BREED) ));
             dog.setImageURL(cursor.getString( cursor.getColumnIndex(DogEntry.COLUMN_NAME_IMAGE) ));
         }
 

@@ -89,6 +89,10 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
         // Load all dogs from database
         mData = dbAdapter.getAllDogs();
 
+        if (mData.size() == 0) {
+            loadJSON();
+        }
+
         mAdapter = new DogRecylerAdapter(getActivity(), mData);
         mRecyclerPets.setAdapter(mAdapter);
 

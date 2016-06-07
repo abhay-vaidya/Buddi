@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -21,7 +22,9 @@ import com.koushikdutta.ion.Ion;
 
 public class ProfileFragment extends Fragment {
 
+    TextView name;
     TextView userName;
+    TextView email;
 
     Button prefButton;
 
@@ -43,30 +46,23 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-       userName = (TextView) view.findViewById(R.id.username);
+        name = (TextView) view.findViewById(R.id.name);
+        userName = (TextView) view.findViewById(R.id.username);
+        email = (TextView) view.findViewById(R.id.emailAddress);
 
-       // loadJSON();
+
+        loadInfo();
 
         return view;
     }
 
-    private void loadJSON() {
+    private void loadInfo() {
         Context context = getActivity();
         SharedPreferences sharedPref = context.getSharedPreferences(
                 getString(R.string.oauth), Context.MODE_PRIVATE);
 
-        Ion.with(getActivity())
-                .load("http://ec2-52-91-255-81.compute-1.amazonaws.com/api/v1/account?access_token=" + sharedPref.getString("auth_token", "broke"))
-                .asJsonArray()
-                .setCallback(new FutureCallback<JsonArray>() {
-                    @Override
-                    public void onCompleted(Exception e, JsonArray result) {
-
-                        JsonObject account = result.get(0).getAsJsonObject();
-
-                        userName.setText(account.get("name").getAsString());
-
-                    }
-                });
+        name.setText( sharedPref.getString("name", "broke") );
+        userName.setText( sharedPref.getString("username", "broke") );
+        email.setText( sharedPref.getString("email", "broke") );
     }
 }

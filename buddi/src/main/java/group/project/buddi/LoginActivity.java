@@ -120,6 +120,10 @@ public class LoginActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = sharedPref.edit();
                             editor.putString("auth_token", auth_token);
                             editor.commit();
+
+                            // Store user info for later
+                            getInfo();
+
                             canProceed = true;
 
                         } catch (Exception x){
@@ -128,6 +132,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
                 });
+
 
 
         new android.os.Handler().postDelayed(
@@ -143,6 +148,42 @@ public class LoginActivity extends AppCompatActivity {
                 }, 1500);
     }
 
+
+    private void getInfo() {
+        Context context = LoginActivity.this;
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                getString(R.string.oauth), Context.MODE_PRIVATE);
+
+        // Get user information
+        Ion.with(LoginActivity.this)
+                .load("http://ec2-52-91-255-81.compute-1.amazonaws.com/api/v1/account?access_token=" + sharedPref.getString("auth_token", "broke"))
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+
+                        try {
+                            String name = result.get("name").getAsString();
+                            String email = result.get("email").getAsString();
+                            String code = result.get("code").getAsString();
+
+                            Context context = LoginActivity.this;
+                            SharedPreferences sharedPref = context.getSharedPreferences(
+                                    getString(R.string.oauth), Context.MODE_PRIVATE);
+
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putString("email", email);
+                            editor.putString("name", name);
+                            editor.putString("code", code);
+                            editor.commit();
+
+                        } catch (Exception x) {
+                            Toast.makeText(LoginActivity.this, "Error loading user info.", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -173,7 +214,19 @@ public class LoginActivity extends AppCompatActivity {
         editor.putBoolean("is_logged_in", isLoggedin);
         editor.commit();
 
-        Intent intent = new Intent(this, QuizActivity.class);
+
+        // Check to see if code is set already
+        String code = sharedPref.getString("code", null);
+
+        Intent intent = null;
+
+        if (code == null) {
+            intent = new Intent(this, QuizActivity.class);
+        } else {
+            Toast.makeText(LoginActivity.this, "Prior code loaded.", Toast.LENGTH_SHORT).show();
+            intent = new Intent(this, HomeActivity.class);
+        }
+
         startActivity(intent);
         finish();
     }
