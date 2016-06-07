@@ -127,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
                             canProceed = true;
 
                         } catch (Exception x){
-
+                            Toast.makeText(LoginActivity.this, "Not logging in.", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -174,7 +174,9 @@ public class LoginActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = sharedPref.edit();
                             editor.putString("email", email);
                             editor.putString("name", name);
-                            editor.putString("code", code);
+                            if (code != null) {
+                                editor.putString("code", code);
+                            }
                             editor.commit();
 
                         } catch (Exception x) {
