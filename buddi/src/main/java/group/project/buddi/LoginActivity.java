@@ -150,6 +150,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void getInfo() {
+
         Context context = LoginActivity.this;
         SharedPreferences sharedPref = context.getSharedPreferences(
                 getString(R.string.oauth), Context.MODE_PRIVATE);
@@ -165,7 +166,10 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             String name = result.get("name").getAsString();
                             String email = result.get("email").getAsString();
-                            String code = result.get("code").getAsString();
+                            String code = null;
+                            if ( !result.get("code").isJsonNull() ) {
+                                code = result.get("code").getAsString();
+                            }
 
                             Context context = LoginActivity.this;
                             SharedPreferences sharedPref = context.getSharedPreferences(
@@ -180,7 +184,7 @@ public class LoginActivity extends AppCompatActivity {
                             editor.commit();
 
                         } catch (Exception x) {
-                            Toast.makeText(LoginActivity.this, "Error loading user info.", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(LoginActivity.this, "Error loading user info.", Toast.LENGTH_SHORT).show();
                         }
 
                     }
