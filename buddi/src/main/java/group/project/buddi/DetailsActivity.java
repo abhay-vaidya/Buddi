@@ -184,12 +184,12 @@ public class DetailsActivity extends AppCompatActivity {
                             petSize.setText(dog.get("size").getAsString());
                             petIntakeDate.setText(dog.get("intake_date").getAsString());
                             petSpecialNeeds.setText(dog.get("special_needs").getAsString());
-                            if (dog.get("neutered").getAsBoolean()) {
+                            if (dog.get("neutered").getAsInt() == 1) {
                                 imageNeutered.setImageResource(R.mipmap.ic_check_circle_black_24dp);
                             } else {
                                 imageNeutered.setImageResource(R.mipmap.ic_cancel_black_24dp);
                             }
-                            if (dog.get("declawed").getAsBoolean()) {
+                            if (dog.get("declawed").getAsInt() == 1) {
                                 imageDeclawed.setImageResource(R.mipmap.ic_check_circle_black_24dp);
                             } else {
                                 imageDeclawed.setImageResource(R.mipmap.ic_cancel_black_24dp);

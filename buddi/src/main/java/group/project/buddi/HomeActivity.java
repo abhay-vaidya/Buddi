@@ -1,5 +1,7 @@
 package group.project.buddi;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -11,6 +13,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import group.project.buddi.model.DatabaseAdapter;
 
@@ -21,6 +25,9 @@ public class HomeActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
+
+    private TextView mName;
+    private TextView mEmail;
 
     private MatchesFragment matchesFragment = new MatchesFragment();
 
@@ -50,6 +57,20 @@ public class HomeActivity extends AppCompatActivity {
         setupDrawerContent(nvDrawer);
         setFragment(matchesFragment);
 
+
+        View hView =  nvDrawer.getHeaderView(0);
+        mName = (TextView) hView.findViewById(R.id.headerName);
+        mEmail = (TextView) hView.findViewById(R.id.headerEmail);
+
+        loadInfo();
+    }
+
+    private void loadInfo() {
+        SharedPreferences sharedPref = this.getSharedPreferences(
+                getString(R.string.oauth), Context.MODE_PRIVATE);
+
+        mName.setText( sharedPref.getString("name", "Name") );
+        mEmail.setText( sharedPref.getString("email", "email@domain.com") );
     }
 
     public void setFragment(Fragment fragment) {
