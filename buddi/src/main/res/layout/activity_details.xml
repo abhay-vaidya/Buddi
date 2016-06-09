@@ -18,14 +18,14 @@
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/imageView"
-            android:layout_width="220dp"
-            android:layout_height="220dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
             android:src="@drawable/dog"
             app:civ_border_width="4dp"
+            android:layout_marginRight="16dp"
             app:civ_border_color="@color/white"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -34,12 +34,12 @@
             android:text="Name"
             android:gravity="center"
             android:textStyle="bold"
-            android:paddingTop="16dp"
+            android:layout_marginTop="30dp"
             android:textColor="#FFF"
             android:id="@+id/petName"
-            android:lines="2"
-            android:layout_below="@+id/imageView"
-            android:layout_centerVertical="true"
+            android:layout_alignStart="@+id/imageView"
+            android:layout_marginLeft="140dp"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
 
         <TextView
@@ -52,7 +52,7 @@
             android:textSize="18sp"
             android:id="@+id/petAge"
             android:layout_below="@+id/petName"
-            android:layout_centerHorizontal="true" />
+            android:layout_alignStart="@+id/petName" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -65,19 +65,19 @@
             android:textSize="12sp"
             android:id="@+id/petBreed"
             android:layout_below="@+id/petAge"
-            android:layout_centerHorizontal="true" />
+            android:layout_alignStart="@+id/petAge" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#FFF"
             android:text="Description"
             android:gravity="center"
             android:textSize="12sp"
+            android:layout_marginTop="16dp"
             android:id="@+id/petDescription"
-            android:layout_below="@+id/petBreed"
-            android:layout_centerHorizontal="true"/>
+            android:layout_below="@+id/imageView" />
 
         <View
             android:layout_width="match_parent"
@@ -92,7 +92,7 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/petDescription"
             android:orientation="vertical"
-            android:layout_marginTop="24dp">
+            android:layout_marginTop="28dp">
 
             <ImageView
                 android:paddingTop="2dp"
@@ -117,6 +117,7 @@
                 android:id="@+id/imageGender"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentTop="true" />
+
             <ImageView
                 android:paddingBottom="6dp"
                 android:layout_width="wrap_content"
@@ -183,7 +184,7 @@
             android:id="@+id/petAttributes"
             android:layout_below="@+id/petDescription"
             android:layout_marginLeft="36dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">

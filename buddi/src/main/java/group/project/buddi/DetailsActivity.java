@@ -144,7 +144,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         if (dog.getColor() != null) {
 
-            petName.setText(dog.getName() + "\n(" + dog.getReferenceNum() + ")");
+            petName.setText(dog.getName() + "(" + dog.getReferenceNum() + ")");
             petAge.setText(dog.getAge() + " years old");
             petBreed.setText(dog.getBreed());
             petColor.setText(dog.getColor());
@@ -175,7 +175,7 @@ public class DetailsActivity extends AppCompatActivity {
                             latitude = dog.get("location").getAsJsonObject().get("lat").getAsString();
                             longitude = dog.get("location").getAsJsonObject().get("long").getAsString();
 
-                            petName.setText(dog.get("name").getAsString() + "\n(" + dog.get("reference_num").getAsString() + ")");
+                            petName.setText(dog.get("name").getAsString() + " (" + dog.get("reference_num").getAsString() + ")");
                             petAge.setText(dog.get("age").getAsString() + " years old");
                             petBreed.setText(dog.get("breed").getAsString());
                             petDescription.setText(dog.get("description").getAsString());
