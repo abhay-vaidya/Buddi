@@ -25,6 +25,6 @@
 </ul>
 
 
-## [Take a look at our very own API!] (https://github.com/umar-ahmed/AnimalServicesAPI)
+## [Take a look at our API!] (https://github.com/umar-ahmed/AnimalServicesAPI)
 
 
