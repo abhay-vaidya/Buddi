@@ -18,7 +18,6 @@ import group.project.buddi.helper.DatabaseHelper;
  */
 public class DatabaseAdapter {
 
-
     public SQLiteDatabase db;
     private final Context m_context;
     private DatabaseHelper m_dbHelper = null;
