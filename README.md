@@ -1,4 +1,5 @@
 # Buddi
+Pronounced bud·dy /ˈbədē/
 
 ![alt text](http://i.imgur.com/Byw3D6F.png "Buddi Logo")
 
