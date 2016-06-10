@@ -27,6 +27,5 @@
 
 ## Take a look at our [API] (https://github.com/umar-ahmed/AnimalServicesAPI) and our [web app](https://github.com/umar-ahmed/BuddiWebApp)!
 
----
 Buddi was primarily developed for Android 6.0 Marshmallow (API 23), but is compatible with 5.0+ (API 21).
 
