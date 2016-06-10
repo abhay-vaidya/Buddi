@@ -25,6 +25,6 @@
 </ul>
 
 
-## [Take a look at our API!] (https://github.com/umar-ahmed/AnimalServicesAPI)
+## Take a look at our [API] (https://github.com/umar-ahmed/AnimalServicesAPI) and our [web app](https://github.com/umar-ahmed/BuddiWebApp)!
 
 
