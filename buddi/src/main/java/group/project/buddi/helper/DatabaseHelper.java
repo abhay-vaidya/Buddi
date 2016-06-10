@@ -9,7 +9,7 @@ import group.project.buddi.model.DogEntry;
 
 /**
  * Helper class for creating and closing the SQLite database
- * @author Umar Ahmed
+ * @author Team Buddi
  * @version 1.0
  */
 public class DatabaseHelper extends SQLiteOpenHelper {

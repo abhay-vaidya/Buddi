@@ -13,7 +13,7 @@ import group.project.buddi.helper.DatabaseHelper;
 
 /**
  * Adapter class for performing CRUD operations on SQLite database
- * @author Umar Ahmed
+ * @author Team Buddi
  * @version 1.0
  */
 public class DatabaseAdapter {

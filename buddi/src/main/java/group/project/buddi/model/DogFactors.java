@@ -2,7 +2,7 @@ package group.project.buddi.model;
 
 /**
  * Describes the comparable factors of a Dog.
- * @author Umar Ahmed
+ * @author Team Buddi
  * @version 1.0
  */
 public class DogFactors {

@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable;
 
 /**
  * Model for Dog data
- * @author Umar Ahmed
+ * @author Team Buddi
  * @version 1.0
  */
 public class Dog {

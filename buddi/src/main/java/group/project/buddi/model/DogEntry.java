@@ -4,7 +4,7 @@ import android.provider.BaseColumns;
 
 /**
  * Class that defines the dog table contents
- * @author Umar Ahmed
+ * @author Team Buddi
  * @version 1.0
  */
 public class DogEntry implements BaseColumns {
