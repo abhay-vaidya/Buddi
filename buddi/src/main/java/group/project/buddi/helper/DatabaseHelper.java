@@ -8,11 +8,12 @@ import android.util.Log;
 import group.project.buddi.model.DogEntry;
 
 /**
- * Created by Ahmed on 2016-06-05.
+ * Helper class for creating and closing the SQLite database
+ * @author Umar Ahmed
+ * @version 1.0
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String LOG_TAG = "DatabaseAdapter";
     private static final String DATABASE_NAME = "dogs.db";
     private static final int DATABASE_VERSION = 1;
 
@@ -38,11 +39,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "DROP TABLE IF EXISTS " + DogEntry.TABLE_NAME;
 
 
-
+    /**
+     * Constructor
+     * @param context the Context of the activity
+     */
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    /**
+     * Sets up the database with the correct schema
+     * @param db the database
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -50,6 +58,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * Upgrades the database
+     * @param db the database
+     * @param oldVersion old version number
+     * @param newVersion new version number
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 

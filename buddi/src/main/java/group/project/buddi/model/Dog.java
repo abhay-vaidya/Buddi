@@ -3,7 +3,9 @@ package group.project.buddi.model;
 import android.graphics.drawable.Drawable;
 
 /**
- * Created by Ahmed on 2016-06-04.
+ * Model for Dog data
+ * @author Umar Ahmed
+ * @version 1.0
  */
 public class Dog {
 
@@ -24,47 +26,27 @@ public class Dog {
     private String m_desc;
 
 
+    /**
+     * Empty constructor
+     */
     public Dog() {
 
     }
 
+    /**
+     * Contstructor (short version)
+     * @param ref reference number
+     * @param name dog name
+     * @param age age of dog
+     * @param breed breed of dog
+     * @param image image URL of dog
+     */
     public Dog(String ref, String name, int age, String breed, String image) {
         m_reference_num = ref;
         m_name = name;
         m_age = age;
         m_breed = breed;
         m_imageURL = image;
-    }
-
-    public Dog(String ref, String name, int age, Size size, String gender, String breed, String color, boolean declawed, boolean neutered, Location location, String intakeDate, DogFactors factors, String desc) {
-        m_reference_num = ref;
-        m_name = name;
-        m_age = age;
-        m_size = size;
-        m_gender = gender;
-        m_breed = breed;
-        m_color = color;
-        m_declawed = declawed;
-        m_neutered = neutered;
-        m_location = location;
-        m_intakeDate = intakeDate;
-        m_factors = factors;
-        m_desc = desc;
-    }
-
-    public Dog(String ref, String name, Size size, String gender, String breed, String color, boolean declawed, boolean neutered, Location location, String intakeDate, DogFactors factors, String desc) {
-        m_reference_num = ref;
-        m_name = name;
-        m_size = size;
-        m_gender = gender;
-        m_breed = breed;
-        m_color = color;
-        m_declawed = declawed;
-        m_neutered = neutered;
-        m_location = location;
-        m_intakeDate = intakeDate;
-        m_factors = factors;
-        m_desc = desc;
     }
 
     // Getters and Setters

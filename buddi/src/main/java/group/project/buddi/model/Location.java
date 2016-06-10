@@ -1,7 +1,9 @@
 package group.project.buddi.model;
 
 /**
- * Created by Ahmed on 2016-06-04.
+ * Describes a shelter location.
+ * @author Umar Ahmed
+ * @version 1.0
  */
 public class Location {
 
@@ -10,6 +12,13 @@ public class Location {
     private double m_latitude;
     private double m_longitude;
 
+    /**
+     * Constructor
+     * @param name name of the shelter
+     * @param phone phone number of the shelter
+     * @param latitude latitude of the shelter
+     * @param longitude longitude of the shelter
+     */
     public Location(String name, String phone, double latitude, double longitude) {
         m_name = name;
         m_telephone_num = phone;

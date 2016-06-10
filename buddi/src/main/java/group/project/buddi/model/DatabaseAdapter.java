@@ -12,7 +12,9 @@ import java.util.List;
 import group.project.buddi.helper.DatabaseHelper;
 
 /**
- * Created by Ahmed on 2016-06-04.
+ * Adapter class for performing CRUD operations on SQLite database
+ * @author Umar Ahmed
+ * @version 1.0
  */
 public class DatabaseAdapter {
 
@@ -22,6 +24,10 @@ public class DatabaseAdapter {
     private DatabaseHelper m_dbHelper = null;
 
 
+    /**
+     * Constructor
+     * @param context the Context of the activity
+     */
     public DatabaseAdapter(Context context) {
         m_context = context;
         if (m_dbHelper == null) {
@@ -29,14 +35,25 @@ public class DatabaseAdapter {
         }
     }
 
+    /**
+     * Open the database for writing
+     * @throws SQLException
+     */
     public void open() throws SQLException {
         db = m_dbHelper.getWritableDatabase();
     }
 
+    /**
+     * Close the database
+     */
     public void close() {
         db.close();
     }
 
+    /**
+     * Gets the SQLite database
+     * @return the database
+     */
     public SQLiteDatabase getDb() {
         return db;
     }
@@ -44,6 +61,10 @@ public class DatabaseAdapter {
 
     // CRUD OPERATIONS
 
+    /**
+     * Inserts a Dog into the database
+     * @param dog the Dog
+     */
     public void insertDog(Dog dog) {
 
         int id = dog.getID();
@@ -64,21 +85,19 @@ public class DatabaseAdapter {
         cVal.put(DogEntry.COLUMN_NAME_IMAGE, imageURL);
         cVal.put(DogEntry.COLUMN_NAME_COLOR, color);
         cVal.put(DogEntry.COLUMN_NAME_GENDER, gender);
-        cVal.put(DogEntry.COLUMN_NAME_BLACKLIST, 0);
+        cVal.put(DogEntry.COLUMN_NAME_BLACKLIST, 0);  // Dogs are not blacklisted by default
 
         // Insert user values in database
         db.insert(DogEntry.TABLE_NAME, null, cVal);
 
     }
 
-    public void updateDog(String column, String value) {
-
-    }
-
-    public void updateDog(String column, int value) {
-
-    }
-
+    /**
+     * Updates the dog at the given id with the provided value
+     * @param column the column to update
+     * @param id the id of the dog to be updated
+     * @param value the new value to assign
+     */
     public void updateDog(String column, int id, boolean value) {
 
         if (value) {
@@ -93,6 +112,9 @@ public class DatabaseAdapter {
 
     }
 
+    /**
+     * Deletes all the dogs in the database
+     */
     public void clearDogs() {
 
         String queryString = "DELETE FROM " + DogEntry.TABLE_NAME + ";";
@@ -100,6 +122,10 @@ public class DatabaseAdapter {
 
     }
 
+    /**
+     * Gets all the dogs in the database that are not blacklisted
+     * @return the dogs
+     */
     public List<Dog> getAllDogs() {
 
         List<Dog> dogList = new ArrayList<Dog>();
@@ -129,7 +155,11 @@ public class DatabaseAdapter {
 
     }
 
-
+    /**
+     * Gets the dog corresponding to the given id
+     * @param id the id
+     * @return null if no dog is found, the Dog otherwise
+     */
     public Dog getDog(int id) {
 
         Dog dog = new Dog();
