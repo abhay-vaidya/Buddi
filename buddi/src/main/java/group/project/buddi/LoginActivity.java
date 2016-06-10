@@ -228,6 +228,7 @@ public class LoginActivity extends AppCompatActivity {
      * Method to handle when login is successful
      */
     public void onLoginSuccess() {
+
         // Set login button and boolean to true
         _loginButton.setEnabled(true);
         isLoggedin = true;
@@ -237,8 +238,17 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sharedPref = context.getSharedPreferences(
                 getString(R.string.oauth), Context.MODE_PRIVATE);
 
+
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean("is_logged_in", isLoggedin);
+
+        // Store user information
+        editor.putString("grant_type", "password");
+        editor.putString("client_id", "f3d259ddd3ed8ff3843839b");
+        editor.putString("client_secret", "4c7f6f8fa93d59c45502c0ae8c4a95b");
+        editor.putString("username", _usernameText.getText().toString());
+        editor.putString("password", _passwordText.getText().toString());
+
         editor.commit();
 
         // Check to see if code is set already
