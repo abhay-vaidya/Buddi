@@ -7,6 +7,12 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+/**
+ * Class to handle splash screen
+ *
+ * @author Team Buddi
+ * @version 1.0
+ */
 public class SplashActivity extends AppCompatActivity {
 
     @Override
@@ -17,6 +23,7 @@ public class SplashActivity extends AppCompatActivity {
         final SharedPreferences sharedPref = context.getSharedPreferences(
                 getString(R.string.oauth), Context.MODE_PRIVATE);
 
+        // New thread
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -43,14 +50,14 @@ public class SplashActivity extends AppCompatActivity {
 
                     //  Apply changes
                     e.apply();
-                } else if ( !sharedPref.getBoolean("is_logged_in", false) ) {
-
+                } else if (!sharedPref.getBoolean("is_logged_in", false)) {
+                    // Go to login screen
                     Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(i);
                     finish();
 
                 } else {
-
+                    // Go to home screen
                     Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                     startActivity(i);
                     finish();
@@ -62,6 +69,5 @@ public class SplashActivity extends AppCompatActivity {
         t.start();
 
         super.onCreate(savedInstanceState);
-
     }
 }

@@ -16,31 +16,34 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import group.project.buddi.model.DatabaseAdapter;
-
+/**
+ * Class to handle main execution and contains all fragments
+ *
+ * @author Team Buddi
+ * @version 1.0
+ */
 public class HomeActivity extends AppCompatActivity {
 
+    // Initialize variables
     private AppBarLayout mAppBarLayout;
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
-
     private TextView mName;
     private TextView mEmail;
-
     private MatchesFragment matchesFragment = new MatchesFragment();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        // Set elevation of Toolbar to 0
         mAppBarLayout = (AppBarLayout) findViewById(R.id.mAppBarLayout);
         mAppBarLayout.setElevation(0);
 
-        // Set a Toolbar to replace the ActionBar.
+        // Set a Toolbar to replace the ActionBar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -52,27 +55,37 @@ public class HomeActivity extends AppCompatActivity {
         // Find our navigation view
         nvDrawer = (NavigationView) findViewById(R.id.nav_view);
 
-
         // Setup drawer view
         setupDrawerContent(nvDrawer);
         setFragment(matchesFragment);
 
+        // Find our navigation drawer header view
+        View hView = nvDrawer.getHeaderView(0);
 
-        View hView =  nvDrawer.getHeaderView(0);
+        // Set up header text
         mName = (TextView) hView.findViewById(R.id.headerName);
         mEmail = (TextView) hView.findViewById(R.id.headerEmail);
 
+        // Load user information into nav header
         loadInfo();
     }
 
+    /**
+     * Method to load name and email address into navigation drawer
+     */
     private void loadInfo() {
         SharedPreferences sharedPref = this.getSharedPreferences(
                 getString(R.string.oauth), Context.MODE_PRIVATE);
 
-        mName.setText( sharedPref.getString("name", "Name") );
-        mEmail.setText( sharedPref.getString("email", "email@domain.com") );
+        mName.setText(sharedPref.getString("name", "Name"));
+        mEmail.setText(sharedPref.getString("email", "email@domain.com"));
     }
 
+    /**
+     * Sets current fragment
+     *
+     * @param fragment fragment to set
+     */
     public void setFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
@@ -80,8 +93,13 @@ public class HomeActivity extends AppCompatActivity {
                 .commit();
     }
 
+    /**
+     * Method for toggling drawer in toolbar
+     *
+     * @return
+     */
     private ActionBarDrawerToggle setupDrawerToggle() {
-        return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open,  R.string.drawer_close);
+        return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open, R.string.drawer_close);
     }
 
     @Override
@@ -93,7 +111,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     // `onPostCreate` called when activity start-up is complete after `onStart()`
-    // NOTE! Make sure to override the method with only a single `Bundle` argument
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -108,6 +125,11 @@ public class HomeActivity extends AppCompatActivity {
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
+    /**
+     * Method to set up drawer content
+     *
+     * @param navigationView the navigation drawer view
+     */
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -119,10 +141,17 @@ public class HomeActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Method to handle drawer item action
+     *
+     * @param menuItem which menuItem has been selected
+     */
     public void selectDrawerItem(MenuItem menuItem) {
         // Create a new fragment and specify the fragment to show based on nav item clicked
         Fragment fragment = null;
         Class fragmentClass;
+
+        // Change fragment depending on which menu item was selected
         switch (menuItem.getItemId()) {
             case R.id.nav_matches:
                 fragmentClass = matchesFragment.getClass();
@@ -151,7 +180,6 @@ public class HomeActivity extends AppCompatActivity {
         // Close the navigation drawer
         mDrawer.closeDrawers();
     }
-
 }
 
 

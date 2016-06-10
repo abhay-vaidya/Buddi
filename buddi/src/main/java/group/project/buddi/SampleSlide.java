@@ -1,8 +1,5 @@
 package group.project.buddi;
 
-/**
- * Created by Abhay on 18/05/2016.
- */
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,10 +7,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * Sample class used as blueprint for other intro slides
+ *
+ * @author Team Buddi
+ * @version 1.0
+ */
 public class SampleSlide extends Fragment {
 
+    // Initialize variables
     private static final String ARG_LAYOUT_RES_ID = "layoutResId";
+    private int layoutResId;
 
+    /**
+     * New instance of a sample slide
+     *
+     * @param layoutResId id of layout
+     * @return a slide
+     */
     public static SampleSlide newInstance(int layoutResId) {
         SampleSlide sampleSlide = new SampleSlide();
 
@@ -24,15 +35,17 @@ public class SampleSlide extends Fragment {
         return sampleSlide;
     }
 
-    private int layoutResId;
-
-    public SampleSlide() {}
+    /**
+     * Constructor
+     */
+    public SampleSlide() {
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(getArguments() != null && getArguments().containsKey(ARG_LAYOUT_RES_ID))
+        if (getArguments() != null && getArguments().containsKey(ARG_LAYOUT_RES_ID))
             layoutResId = getArguments().getInt(ARG_LAYOUT_RES_ID);
     }
 
@@ -41,5 +54,4 @@ public class SampleSlide extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(layoutResId, container, false);
     }
-
 }

@@ -26,16 +26,21 @@ import group.project.buddi.model.DatabaseAdapter;
 import group.project.buddi.model.Dog;
 import group.project.buddi.model.DogEntry;
 
-
+/**
+ * Class to handle main dog matches fragment
+ *
+ * @author Team Buddi
+ * @version 1.0
+ */
 public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
+    // Initialize variables
     private List<Dog> mData = new ArrayList<Dog>();
-    private DogRecylerAdapter mAdapter;
+    private DogRecyclerAdapter mAdapter;
     private RecyclerView mRecyclerPets;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private DatabaseAdapter dbAdapter;
     private Context m_context;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,19 +48,21 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
         m_context = getContext();
 
-
+        // Set up and inflate view
         View rootView = inflater.inflate(R.layout.fragment_matches, container, false);
 
+        // Set up pull to refresh layout
         mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeContainer);
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
+        // Set up recycler view
         mRecyclerPets = (RecyclerView) rootView.findViewById(R.id.petList);
         mRecyclerPets.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        // Load information from database
         loadFromDB();
 
-
-        // init swipe to dismiss logic
+        // Swipe to dismiss logic
         ItemTouchHelper swipeToDismissTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -66,10 +73,9 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                // callback for swipe to dismiss, removing item from data and adapter
+                // Callback for swipe to dismiss, removing item from data and adapter
 
                 int id = mData.get(viewHolder.getAdapterPosition()).getID();
-//                Toast.makeText(getContext(), "Removed dog with id:" + id, Toast.LENGTH_SHORT).show();
 
                 dbAdapter = new DatabaseAdapter(m_context);
                 try {
@@ -79,21 +85,20 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
                 }
 
                 dbAdapter.updateDog(DogEntry.COLUMN_NAME_BLACKLIST, id, true);
-
-
                 mData.remove(viewHolder.getAdapterPosition());
                 mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
             }
         });
         swipeToDismissTouchHelper.attachToRecyclerView(mRecyclerPets);
-
-
         return rootView;
     }
 
+    /**
+     * Method to load information from database
+     */
     private void loadFromDB() {
 
-        // get Instance  of Database Adapter
+        // Get instance  of Database Adapter
         dbAdapter = new DatabaseAdapter(m_context);
         try {
             dbAdapter.open();
@@ -108,34 +113,40 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
             loadJSON();
         }
 
-        mAdapter = new DogRecylerAdapter(getActivity(), mData);
+        // Bind adapter to recycler view
+        mAdapter = new DogRecyclerAdapter(getActivity(), mData);
         mRecyclerPets.setAdapter(mAdapter);
-
     }
 
+    /**
+     * Method to load information from API
+     */
     private void loadJSON() {
         Context context = getActivity();
         SharedPreferences sharedPref = context.getSharedPreferences(
                 getString(R.string.oauth), Context.MODE_PRIVATE);
 
         String code = sharedPref.getString("code", "A0B0C0D0E0");
-        
+
+        // Use Ion to pull information from Amazon Web Services
         Ion.with(getActivity())
                 .load("http://ec2-52-91-255-81.compute-1.amazonaws.com/api/v1/feed/" + code + "?access_token=" + sharedPref.getString("auth_token", "broke"))
                 .asJsonArray()
                 .setCallback(new FutureCallback<JsonArray>() {
                     @Override
                     public void onCompleted(Exception e, JsonArray result) {
-                        
+
+                        // If request resulted in null, toast error message
                         if (result == null) {
                             Toast.makeText(m_context, "Error loading results.", Toast.LENGTH_SHORT).show();
                             return;
                         }
 
+                        // Clear dogs list
                         mData.clear();
 
+                        // Add dogs to new list
                         for (int i = 0; i < result.size(); i++) {
-
                             JsonObject jObj = result.get(i).getAsJsonObject();
 
                             Dog dog = new Dog();
@@ -145,20 +156,22 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
                             dog.setBreed(jObj.get("breed").getAsString());
                             dog.setImageURL(jObj.get("image").getAsString());
 
-                            // get Instance  of Database Adapter
+                            // Get Instance  of Database Adapter
                             dbAdapter = new DatabaseAdapter(m_context);
                             dbAdapter.open();
-
                             dbAdapter.insertDog(dog);
-
                         }
 
+                        // Load information from database
                         loadFromDB();
 
                     }
                 });
     }
 
+    /**
+     * When pulled to refresh, load from JSON again
+     */
     @Override
     public void onRefresh() {
         mSwipeRefreshLayout.setRefreshing(false);
@@ -166,6 +179,9 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
         mAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * When activity is destroyed, close database
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -173,6 +189,12 @@ public class MatchesFragment extends Fragment implements SwipeRefreshLayout.OnRe
         dbAdapter.close();
     }
 
+    /**
+     * Load image from online
+     *
+     * @param url URL of image
+     * @return a drawable type image
+     */
     public static Drawable loadImage(String url) {
         try {
             Drawable d = Drawable.createFromPath(url);

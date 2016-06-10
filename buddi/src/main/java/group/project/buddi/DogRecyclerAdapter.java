@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -22,53 +21,68 @@ import java.util.List;
 import group.project.buddi.model.Dog;
 
 /**
- * Created by Abhay on 10/05/2016.
+ * Class to handle list of dogs
+ *
+ * @author Team Buddi
+ * @version 1.0
  */
-public class DogRecylerAdapter extends RecyclerView.Adapter<DogRecylerAdapter.RecyclerViewHolder> {
+public class DogRecyclerAdapter extends RecyclerView.Adapter<DogRecyclerAdapter.RecyclerViewHolder> {
 
+    // Initialize variables
     private static List<Dog> m_dogList;
     private Context m_context;
 
-    private boolean test = false;
-
-    public DogRecylerAdapter(Context context, List<Dog> dogList) {
-
+    /**
+     * Constructor
+     *
+     * @param context context of activity
+     * @param dogList list of dogs
+     */
+    public DogRecyclerAdapter(Context context, List<Dog> dogList) {
         m_dogList = dogList;
         m_context = context;
     }
 
-
-
+    /**
+     * Get size of dog list
+     *
+     * @return size of dog list
+     */
     @Override
     public int getItemCount() {
         return m_dogList.size();
     }
 
 
-
     @Override
     public void onBindViewHolder(final RecyclerViewHolder recyclerViewHolder, int i) {
-        final Dog d = m_dogList.get(recyclerViewHolder.getAdapterPosition());
-        recyclerViewHolder.vName.setText( d.getName() );
-        recyclerViewHolder.vAge.setText( String.valueOf(d.getAge()) + " years old" );
-        recyclerViewHolder.vBreed.setText( d.getBreed() );
 
+        // Bind information to holder
+        final Dog d = m_dogList.get(recyclerViewHolder.getAdapterPosition());
+        recyclerViewHolder.vName.setText(d.getName());
+        recyclerViewHolder.vAge.setText(String.valueOf(d.getAge()) + " years old");
+        recyclerViewHolder.vBreed.setText(d.getBreed());
         Picasso.with(m_context).load(d.getImageURL()).into(recyclerViewHolder.vImage);
 
-
+        // Open details screen when button pressed
         recyclerViewHolder.vButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(v.getContext(), DetailsActivity.class);
                 intent.putExtra("pet_id", d.getID());
                 m_context.startActivity(intent);
                 ((Activity) m_context).overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
-
             }
         });
     }
 
+    /**
+     * Inner class to handle item view
+     *
+     * @param viewGroup viewGroup
+     * @param i         view type
+     * @return itemViewHolder
+     */
     public RecyclerViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
@@ -78,46 +92,60 @@ public class DogRecylerAdapter extends RecyclerView.Adapter<DogRecylerAdapter.Re
         return itemViewHolder;
     }
 
-    public void dismissPet(int pos){
+    /**
+     * Remove pet from list when swiped away
+     *
+     * @param pos the position of the pet
+     */
+    public void dismissPet(int pos) {
         m_dogList.remove(pos);
         this.notifyItemRemoved(pos);
     }
 
-    public class RecyclerViewHolder extends RecyclerView.ViewHolder{
+    /**
+     * ViewHolder class to bind layout to data
+     */
+    public class RecyclerViewHolder extends RecyclerView.ViewHolder {
+        // Initialize variables
         protected TextView vName;
         protected TextView vAge;
         protected TextView vBreed;
         protected ImageView vImage;
         protected ImageButton vButton;
 
+        // Bind items
         public RecyclerViewHolder(View v) {
             super(v);
-            vName =  (TextView) v.findViewById(R.id.petName);
+            vName = (TextView) v.findViewById(R.id.petName);
             vAge = (TextView) v.findViewById(R.id.petAge);
-            vBreed= (TextView) v.findViewById(R.id.petBreed);
+            vBreed = (TextView) v.findViewById(R.id.petBreed);
             vImage = (ImageView) v.findViewById(R.id.imageView);
             vButton = (ImageButton) v.findViewById(R.id.detailsButton);
         }
     }
 
-
-    public void swap(List list){
+    /**
+     * Swap two dogs
+     *
+     * @param list
+     */
+    public void swap(List list) {
         if (m_dogList != null) {
             m_dogList.clear();
             m_dogList.addAll(list);
-        }
-        else {
+        } else {
             m_dogList = list;
         }
         notifyDataSetChanged();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
-
+    /**
+     * Class to handle the details button
+     */
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageButton detailsButton;
 
         public ViewHolder(View itemView) {
-
             super(itemView);
             detailsButton = (ImageButton) itemView.findViewById(R.id.detailsButton);
 
@@ -130,17 +158,21 @@ public class DogRecylerAdapter extends RecyclerView.Adapter<DogRecylerAdapter.Re
         }
     }
 
+    /**
+     * Method to load image from online
+     *
+     * @param url URL of image
+     * @return a drawable type image
+     */
     private Drawable loadImageFromWeb(String url) {
         try {
             InputStream is = (InputStream) new URL(url).getContent();
             Drawable d = Drawable.createFromStream(is, "src name");
             return d;
         } catch (Exception e) {
-            //Toast.makeText(m_context, "Error loading images.", Toast.LENGTH_SHORT).show();
             return null;
         }
     }
-
 }
 
 

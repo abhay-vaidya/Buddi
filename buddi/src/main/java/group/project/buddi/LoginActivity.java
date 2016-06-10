@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
@@ -24,27 +23,41 @@ import java.util.regex.Pattern;
 import butterknife.ButterKnife;
 import butterknife.Bind;
 
+/**
+ * Class to handle login screen
+ *
+ * @author Team Buddi
+ * @version 1.0
+ */
 public class LoginActivity extends AppCompatActivity {
+
+    // Initialize variables
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
     public boolean isLoggedin = false;
     public boolean canProceed = false;
     public String auth_token;
 
-    @Bind(R.id.input_username) EditText _usernameText;
-    @Bind(R.id.input_password) EditText _passwordText;
-    @Bind(R.id.btn_login) Button _loginButton;
-    @Bind(R.id.link_signup) TextView _signupLink;
+    // Bind text fields and textviews to layout items
+    @Bind(R.id.input_username)
+    EditText _usernameText;
+    @Bind(R.id.input_password)
+    EditText _passwordText;
+    @Bind(R.id.btn_login)
+    Button _loginButton;
+    @Bind(R.id.link_signup)
+    TextView _signupLink;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        // Hide toolbar
         getSupportActionBar().hide();
-
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
+        // Set listeners for login and signup buttons
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -65,24 +78,30 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method to handle logging in
+     */
     public void login() {
+        // Log line
         Log.d(TAG, "Login");
 
+        // Call login failed method if login not validated
         if (!validate()) {
             onLoginFailed();
             return;
         }
 
+        // Set login button to enabled
         _loginButton.setEnabled(false);
 
+        // Set up authenticating progress dialog
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
                 R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-
-        /* STORE IN SHARED PREFERENCES */
+        // Store in shared preferences
         Context context = LoginActivity.this;
         SharedPreferences sharedPref = context.getSharedPreferences(
                 getString(R.string.oauth), Context.MODE_PRIVATE);
@@ -94,7 +113,6 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("username", _usernameText.getText().toString());
         editor.putString("password", _passwordText.getText().toString());
         editor.commit();
-
 
         // Authenticate via API
         Ion.with(context)
@@ -112,7 +130,7 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             auth_token = result.get("access_token").getAsString();
 
-                           /* STORE IN SHARED PREFERENCES */
+                            // Store in shared preferences
                             Context context = LoginActivity.this;
                             SharedPreferences sharedPref = context.getSharedPreferences(
                                     getString(R.string.oauth), Context.MODE_PRIVATE);
@@ -126,15 +144,14 @@ public class LoginActivity extends AppCompatActivity {
 
                             canProceed = true;
 
-                        } catch (Exception x){
+                        } catch (Exception x) {
                             Toast.makeText(LoginActivity.this, "Not logging in.", Toast.LENGTH_SHORT).show();
                         }
 
                     }
                 });
 
-
-
+        // Delay for ensuring authentication
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
@@ -148,7 +165,9 @@ public class LoginActivity extends AppCompatActivity {
                 }, 1500);
     }
 
-
+    /**
+     * Method to get user information
+     */
     private void getInfo() {
 
         Context context = LoginActivity.this;
@@ -162,12 +181,12 @@ public class LoginActivity extends AppCompatActivity {
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
-
+                        // Set user information
                         try {
                             String name = result.get("name").getAsString();
                             String email = result.get("email").getAsString();
                             String code = null;
-                            if ( !result.get("code").isJsonNull() ) {
+                            if (!result.get("code").isJsonNull()) {
                                 code = result.get("code").getAsString();
                             }
 
@@ -184,9 +203,7 @@ public class LoginActivity extends AppCompatActivity {
                             editor.commit();
 
                         } catch (Exception x) {
-                            //Toast.makeText(LoginActivity.this, "Error loading user info.", Toast.LENGTH_SHORT).show();
                         }
-
                     }
                 });
     }
@@ -195,8 +212,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
-
-                // By default we just finish the Activity and log them in automatically
+                // By default we just finish the Activity and take them back to login screen
                 this.finish();
             }
         }
@@ -204,14 +220,19 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // Disable going back to the MainActivity
+        // Disable going back to the HomeActivity
         moveTaskToBack(true);
     }
 
+    /**
+     * Method to handle when login is successful
+     */
     public void onLoginSuccess() {
+        // Set login button and boolean to true
         _loginButton.setEnabled(true);
         isLoggedin = true;
 
+        // Store in shared preferences that user has logged in
         Context context = LoginActivity.this;
         SharedPreferences sharedPref = context.getSharedPreferences(
                 getString(R.string.oauth), Context.MODE_PRIVATE);
@@ -220,16 +241,15 @@ public class LoginActivity extends AppCompatActivity {
         editor.putBoolean("is_logged_in", isLoggedin);
         editor.commit();
 
-
         // Check to see if code is set already
         String code = sharedPref.getString("code", null);
 
         Intent intent = null;
 
+        // If user has a matching code already take them to home screen, otherwise take them to quiz
         if (code == null) {
             intent = new Intent(this, QuizActivity.class);
         } else {
-            Toast.makeText(LoginActivity.this, "Prior code loaded.", Toast.LENGTH_SHORT).show();
             intent = new Intent(this, HomeActivity.class);
         }
 
@@ -237,21 +257,33 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Method to handle when login fails
+     */
     public void onLoginFailed() {
         _loginButton.setEnabled(true);
+        // Make toast telling user login has failed
         Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Validation method
+     *
+     * @return boolean  whether text inputs are valid or not
+     */
     public boolean validate() {
-        boolean valid = true;
 
+        // Initialize variables
+        boolean valid = true;
         String username = _usernameText.getText().toString();
         String password = _passwordText.getText().toString();
 
+        // String pattern for username
         Pattern p = Pattern.compile("^[a-zA-Z0-9-_]+$");
         Matcher m = p.matcher(username);
 
-        if ( username.isEmpty() || !m.matches() ) {
+        // Check if username and password are valid
+        if (username.isEmpty() || !m.matches()) {
             _usernameText.setError("Enter a valid username");
             valid = false;
         } else {
@@ -264,7 +296,6 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             _passwordText.setError(null);
         }
-
         return valid;
     }
 }
