@@ -34,7 +34,6 @@
         android:id="@+id/rankingSubtitle"
         android:layout_centerHorizontal="true" />
 
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/attributeCards"
         android:layout_width="290dp"

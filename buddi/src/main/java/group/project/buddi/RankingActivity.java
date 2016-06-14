@@ -40,6 +40,7 @@ public class RankingActivity extends AppCompatActivity {
         // Set up RecyclerView for list of attributes
         mRecyclerView = (RecyclerView) findViewById(R.id.attributeCards);
         mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setNestedScrollingEnabled(false);
 
         // Set up layout manager
         mLayoutManager = new LinearLayoutManager(this);
