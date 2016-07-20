@@ -7,7 +7,6 @@ Pronounced bud·dy /ˈbədē/
 
 ###### Developed by Abhay Vaidya, Hamzah Randhawa, Sayon Kathirgamanathan, and Umar Ahmed.
 
----
 ## Screenshots:
 
 ![alt text](http://i.imgur.com/f7nH7UK.png "Buddi Logo")
